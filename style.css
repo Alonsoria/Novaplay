@@ -1,0 +1,323 @@
+/* --------- BASE --------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f1a; /* fondo oscuro gamer */
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+/* --------- HEADER --------- */
+header {
+    background: linear-gradient(to bottom, #250643, #7c0ba1);
+    padding: 15px 0 60px; /* más espacio para el logo */
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.6);
+}
+
+header .logo {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    filter: drop-shadow(0 0 15px #d60d7b);
+}
+
+/* --------- NAVBAR --------- */
+.navbar { position: relative; }
+.navbar ul {
+    list-style: none;
+    margin: 15px 0 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.navbar ul li { position: relative; }
+
+.navbar ul li a, .platform-toggle {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 8px;
+}
+
+/* efecto neon al hover */
+.navbar ul li a:hover, .platform-toggle:hover {
+    color: #d60d7b;
+    text-shadow: 0 0 10px #d60d7b, 0 0 20px #7c0ba1;
+}
+
+/* --------- LOGIN BTN --------- */
+.user-login {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.btn-login {
+    background: linear-gradient(to right, #d60d7b, #7c0ba1);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(214,13,123,0.7);
+}
+
+.btn-login:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #d60d7b, 0 0 30px #7c0ba1;
+}
+
+/* badge carrito */
+.cart-badge {
+    background: #d60d7b;
+    color: #fff;
+    border-radius: 12px;
+    padding: 2px 8px;
+    margin-left: 6px;
+    font-weight: bold;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+/* --------- MAIN --------- */
+h2 {
+    color: #d60d7b;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 0 0 10px #8a0589;
+}
+
+/* PRODUCT GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    gap: 20px;
+    padding: 24px;
+}
+
+/* PRODUCT CARD */
+.card {
+    background: #1a1a2e;
+    border: 2px solid #7c0ba1;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(124,11,161,0.3);
+    position: relative; /* necesario para posicionar icons y botón */
+    padding-bottom: 64px; /* espacio para botones e icons absolutos */
+}
+
+.card h3 {
+    margin: 8px 0;
+    color: #fff;
+    text-shadow: 0 0 8px #d60d7b;
+}
+
+/* hover */
+.card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #d60d7b;
+    box-shadow: 0 0 15px #d60d7b, 0 0 30px #8a0589;
+}
+
+/* BOTÓN PRODUCTO (absolute bottom-right) */
+.btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #d60d7b, #8a0589);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 22px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 10px rgba(138,5,137,0.7);
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+}
+
+.btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
+}
+
+/* --------- FOOTER --------- */
+footer {
+    background: linear-gradient(to bottom, #7c0ba1, #250643);
+    padding: 25px;
+    text-align: center;
+    color: #fff;
+    margin-top: 40px;
+    font-size: 14px;
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.6);
+}
+
+footer p { margin: 0; opacity: 0.8; }
+
+/* -------------------------
+   Imágenes y carrito styles
+   ------------------------ */
+.product-img {
+    width: 100%;
+    max-height: 120px;      /* más pequeñas que antes */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 8px rgba(214,13,123,0.35);
+    transition: transform 0.2s ease;
+}
+
+.card:hover .product-img {
+    transform: scale(1.03);
+}
+
+/* PLATAFORM ICONS INSIDE CARDS (diminutas) */
+.plat-list {
+    display: flex;
+    gap: 6px;
+    position: absolute;
+    left: 12px;
+    bottom: 14px;
+    align-items: center;
+}
+
+.plat-thumb {
+    width: 22px !important;     /* tamaño fijo */
+    height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    object-fit: contain;
+    display: inline-block;
+    flex: 0 0 auto !important;  /* evita que el flex lo estire */
+    filter: drop-shadow(0 0 4px rgba(124,11,161,0.6));
+    border-radius: 4px;
+}
+
+
+
+/* Submenu (dropdown) - animado open/close */
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1), opacity 180ms;
+    background: linear-gradient(180deg,#1a1a2e,#161622);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    min-width: 200px;
+    pointer-events: none;
+    z-index: 40;
+}
+
+/* estado abierto */
+.submenu.open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* lista dentro del submenu */
+.submenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu ul li {
+    margin: 6px 0;
+}
+
+.submenu a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+.submenu a:hover {
+    background: rgba(214,13,123,0.08);
+}
+
+/* icono dentro del submenu (ligeramente más grande que thumb) */
+.plat-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* boton de cerrar dentro del submenu */
+.submenu-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* pequeños ajustes responsivos */
+@media (max-width: 720px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); padding: 12px; gap: 12px; }
+    header { padding-bottom: 48px; }
+    .navbar ul { gap: 14px; font-size: 14px; }
+}
+
+/* --------- CARRUSEL DESTACADOS --------- */
+.carrusel-destacados {
+    margin: 40px auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.carrusel-destacados h2 {
+    margin-bottom: 20px;
+}
+
+.swiper {
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.swiper-slide img {
+    width: 220px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+/* Slides laterales más transparentes */
+.swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.5;
+    transform: scale(0.85);
+}
