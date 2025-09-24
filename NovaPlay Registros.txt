@@ -1,0 +1,60 @@
+FUNCIONALIDADES DEL PROGRAMA 
+
+Estas funciones son las que el programa tiene
+
+-Funcionalidad desplegar menú de plataformas (Listo)
+
+-Funcionalidad insertar juegos desde la base de datos (Listo)
+Pasos a seguir para insertar juegos desde la base de datos:
+
+1.Esto sirve para insertar un juego, dejé unos ejemplos para ti diego, ya nada más cambia el nombre, descripcion y precio 
+
+(IMPORTANTE: Recuerda siempre picar el nombre de la base de datos, no una tabla dentro de ellas, una vez le picaste al nombre de la base de datos dale a SQL) (phpMyAdmin)
+
+INSERT INTO productos (nombre, descripcion, categoria, precio, stock, codigo_digital, imagen)
+VALUES (
+  'Friday Night Funkin', 
+  'Impresiona a tu novia enfrentando a distintos enemigos en este juego ritmico.', 
+  'videojuego', 
+  399.99, 
+  50, 
+  1, 
+  './images/(Nombre de la imagen, aqui debes de agregar la imagen que pusiste dentro de la carpeta de imagenes, NO PLATAFORMAS).jpg'
+);
+
+-Funcionalidad filtrar juegos por plataformas (Listo)
+Pasos a seguir para asignar plataformas a los juegos desde la base de datos:
+
+1.Esto es mas complejo, pero en explicacion sencilla, el primer numero es el ID_producto del juego, en el caso anterior fue Friday Night Funkin, si revisas la base de datos 
+verás que dice 5, ese es el primer valor, y el segundo valor es la plataforma, las plataformas serán:
+
+id_plataforma
+1=Xbox
+2=PlayStation
+3=Steam
+4=PC
+
+2.Deberías insertarlos algo así, te deje apartado una descripcion por si ocupas ayuda
+
+INSERT INTO producto_plataforma (id_producto, id_plataforma)
+VALUES
+(5, 1), -- FridayNightFunkin en Xbox
+(5, 2), -- Friday Night Funkin en PlayStation
+(5, 3); -- Friday Night Funkin en Steam
+
+
+
+-Funcionalidad Carrusel 
+-No jala esta madre q pd de donde verga saca el halo
+-Por que mierdas el puto carrusel cambia de imagenes cuando el usuario interactua con el
+-Por que está madre sale de izquierda a derecha 
+-YA JALA 
+
+-Funcionalidad Combos (Pendiente)
+Basicamente lo mismo que en productos, solo que en vez de juegos, sean suscripciones
+
+-Funcionalidad Acerca de nosotros
+Solamente agregar una descripcion de acerca de nuestra empresa y quienes somos, de ser posible, con imagenes incluidas
+
+-Funcionalidad carrito (Pendiente)
+Funciona el agregar productos, se van sumando cuantos juegos hay, pero no dice cuanto es el precio total ni sale pagina

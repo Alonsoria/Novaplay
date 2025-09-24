@@ -98,7 +98,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 </header>
 
 <main>
-    <!-- 🎮 Carrusel de juegos destacados -->
+    <!-- Carrusel de juegos destacados -->
     <section class="carrusel-destacados">
         <h2>Juegos Destacados</h2>
         <div class="swiper mySwiper">
@@ -107,10 +107,15 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                 <div class="swiper-slide"><img src="./images/tlou.jpg" alt="The Last of Us"></div>
                 <div class="swiper-slide"><img src="./images/fifa24.jpg" alt="FIFA 24"></div>
                 <div class="swiper-slide"><img src="./images/minecraft.jpg" alt="Minecraft"></div>
-                <div class="swiper-slide"><img src="./images/halo.jpg" alt="Halo Infinite"></div>
+                <div class="swiper-slide"><img src="./images/Halo_infinite.png" alt="Halo Infinite"></div>
             </div>
+
+            <!-- Botones de navegación -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </section>
+
 
     <h2>Catálogo de Productos</h2>
     <div class="grid">
@@ -155,20 +160,28 @@ var swiper = new Swiper(".mySwiper", {
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
-    slidesPerView: 5,
+    slidesPerView: 2, // 🔹 Ajusta automáticamente según el ancho
     loop: true,
     coverflowEffect: {
-        rotate: 0,
-        stretch: 0,
-        depth: 200,
-        modifier: 2,
+        rotate: 0,      // rotación 0 = rectos
+        stretch: -30,   // 🔹 hace que se junten más
+        depth: 250,     // profundidad
+        modifier: 2,    // intensidad del efecto
         slideShadows: false,
     },
     autoplay: {
         delay: 2500,
         disableOnInteraction: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
     }
 });
+
+
+
+
 </script>
 
 <!-- JS Toggle submenu -->
