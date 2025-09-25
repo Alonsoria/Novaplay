@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("config.php");
+include 'config.php'; 
 
 if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = [];
@@ -15,7 +15,7 @@ if (isset($_GET['add'])) {
             $_SESSION['carrito'][$id]++;
         }
     }
-    header("Location: index.php");
+    header("Location: productos.php");
     exit;
 }
 
@@ -25,17 +25,15 @@ if ($platRes) {
     while ($r = $platRes->fetch_assoc()) $platformsArr[] = $r;
 }
 
-$filtroPlataforma = isset($_GET['plataforma']) ? (int)$_GET['plataforma'] : 0;
-
-if ($filtroPlataforma > 0) {
-    $sql = "SELECT DISTINCT p.* FROM productos p
-            INNER JOIN producto_plataforma pp ON p.id_producto = pp.id_producto
-            WHERE pp.id_plataforma = $filtroPlataforma
-            ORDER BY p.nombre";
-} else {
-    $sql = "SELECT * FROM productos ORDER BY nombre";
-}
-$result = $conn->query($sql);
+$categorias = [
+    "suscripcion" => "Suscripciones disponibles",
+    "accesorio"   => "Accesorios disponibles",
+    "videojuego"  => "Videojuegos disponibles",
+    "tarjeta"     => "Tarjetas prepago",
+    "DLC"         => "Contenido adicional (DLC)",
+    "moneda_virtual" => "Monedas virtuales",
+    "paquete"     => "Paquetes especiales"
+];
 
 $cartCount = 0;
 foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
@@ -44,16 +42,14 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Novaplay</title>
+    <title>Novaplay - Productos</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
 <header>
     <div class="header-container">
         <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-
         <nav class="navbar">
             <ul>
                 <li><a href="index.php">Inicio</a></li>
@@ -71,7 +67,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                         <ul>
                             <?php foreach($platformsArr as $plat): ?>
                                 <li>
-                                    <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
+                                    <a href="productos.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
                                         <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"> 
                                         <?php echo htmlspecialchars($plat['nombre']); ?>
                                     </a>
@@ -81,100 +77,63 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                     </div>
                 </li>
 
-                <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+                <li><a href="carrito.php">🛒 Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
             </ul>
         </nav>
 
         <div class="user-login">
-            <a href="login.php" class="btn-login">Iniciar Sesión</a>
+            <a href="login.php" class="btn-login">👤 Iniciar Sesión</a>
         </div>
     </div>
 </header>
 
 <main>
-    <section class="carrusel-destacados">
-        <h2>Juegos Destacados</h2>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="./images/gta.jpg" alt="GTA V"></div>
-                <div class="swiper-slide"><img src="./images/tlou.jpg" alt="The Last of Us"></div>
-                <div class="swiper-slide"><img src="./images/fifa24.jpg" alt="FIFA 24"></div>
-                <div class="swiper-slide"><img src="./images/minecraft.jpg" alt="Minecraft"></div>
-                <div class="swiper-slide"><img src="./images/Halo_infinite.png" alt="Halo Infinite"></div>
-            </div>
-
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-    </section>
-
-
-    <h2>Catálogo de Productos</h2>
-    <div class="grid">
-        <?php while($row = $result->fetch_assoc()) {
-            $idProd = (int)$row['id_producto'];
-            $imgPath = (!empty($row['imagen']) && file_exists($row['imagen'])) ? $row['imagen'] : './images/placeholder.png';
-        ?>
+    <?php
+    foreach ($categorias as $clave => $titulo):
+        $sql = "SELECT * FROM productos WHERE categoria='$clave' ORDER BY nombre";
+        $result = $conn->query($sql);
+        if ($result && $result->num_rows > 0):
+    ?>
+        <h2><?php echo $titulo; ?></h2>
+        <div class="grid">
+            <?php while($row = $result->fetch_assoc()):
+                $idProd = (int)$row['id_producto'];
+                $imgPath = (!empty($row['imagen']) && file_exists($row['imagen'])) ? $row['imagen'] : './images/placeholder.png';
+            ?>
             <div class="card">
                 <img src="<?php echo htmlspecialchars($imgPath); ?>" alt="<?php echo htmlspecialchars($row['nombre']); ?>" class="product-img">
                 <h3><?php echo htmlspecialchars($row['nombre']); ?></h3>
                 <p><?php echo htmlspecialchars($row['descripcion']); ?></p>
                 <p><strong>$<?php echo number_format($row['precio'],2); ?></strong></p>
 
+                <!-- Plataformas del producto -->
                 <div class="plat-list">
                     <?php
-                        $pSql = "SELECT pl.* FROM plataformas pl
-                                 INNER JOIN producto_plataforma pp ON pl.id_plataforma = pp.id_plataforma
-                                 WHERE pp.id_producto = $idProd";
-                        $pRes = $conn->query($pSql);
-                        while ($pRow = $pRes->fetch_assoc()) {
-                            $icon = !empty($pRow['icono']) ? $pRow['icono'] : './images/platforms/placeholder.png';
-                            echo '<img src="'.htmlspecialchars($icon).'" alt="'.htmlspecialchars($pRow['nombre']).'" title="'.htmlspecialchars($pRow['nombre']).'" class="plat-thumb">';
-                        }
+                    $pSql = "SELECT pl.* FROM plataformas pl
+                             INNER JOIN producto_plataforma pp ON pl.id_plataforma = pp.id_plataforma
+                             WHERE pp.id_producto = $idProd";
+                    $pRes = $conn->query($pSql);
+                    while ($pRow = $pRes->fetch_assoc()):
+                        $icon = !empty($pRow['icono']) ? $pRow['icono'] : './images/platforms/placeholder.png';
                     ?>
+                        <img src="<?php echo htmlspecialchars($icon); ?>" alt="<?php echo htmlspecialchars($pRow['nombre']); ?>" title="<?php echo htmlspecialchars($pRow['nombre']); ?>" class="plat-thumb">
+                    <?php endwhile; ?>
                 </div>
 
-                <a href="index.php?add=<?php echo $idProd; ?>" class="btn">Agregar</a>
+                <a href="productos.php?add=<?php echo $idProd; ?>" class="btn">Agregar</a>
             </div>
-        <?php } ?>
-    </div>
+            <?php endwhile; ?>
+        </div>
+    <?php
+        endif;
+    endforeach;
+    ?>
 </main>
 
 <footer>
     <p>&copy; <?php echo date("Y"); ?> Novaplay - E-commerce de Videojuegos</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-var swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 2, 
-    loop: true,
-    coverflowEffect: {
-        rotate: 0,      
-        stretch: -30,   
-        depth: 250,    
-        modifier: 2,    
-        slideShadows: false,
-    },
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    }
-});
-
-
-
-
-</script>
-
-<!-- JS Toggle submenu -->
 <script>
 (function(){
     const toggle = document.getElementById('platformToggle');

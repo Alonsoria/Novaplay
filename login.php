@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>👤 Iniciar Sesión</h2>
+        <h2>Iniciar Sesión</h2>
         <form action="login_process.php" method="POST">
             <input type="text" name="usuario" placeholder="Usuario o Email" required>
             <input type="password" name="password" placeholder="Contraseña" required>
