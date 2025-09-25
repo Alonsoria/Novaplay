@@ -11,10 +11,25 @@ if (isset($_GET['action']) && $_GET['action'] === 'clear') {
 }
 
 $carrito = $_SESSION['carrito'] ?? [];
-// Si no hay productos:
+$compraRealizada = false;
+$codigosGenerados = [];
+$bono = 0;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['metodo_pago'])) {
+    // Simula compra y genera códigos
+    $compraRealizada = true;
+    $numJuegos = count($carrito);
+    for ($i = 0; $i < $numJuegos; $i++) {
+        $codigosGenerados[] = strtoupper(bin2hex(random_bytes(8)));
+    }
+    $bono = isset($_POST['total_final']) ? floatval($_POST['total_final']) * 0.10 : 0;
+    unset($_SESSION['carrito']); // Vacía el carrito tras compra
+}
+
 if (empty($carrito)) {
     $productosEnCarrito = [];
     $total = 0;
+    $total_final = 0;
 } else {
     // detectar columna PK en productos
     $pk = null;
@@ -28,16 +43,13 @@ if (empty($carrito)) {
         }
     }
 
-    // crear lista de ids seguros (enteros)
     $ids = array_map('intval', array_keys($carrito));
-    // consulta por los ids
     $idsList = implode(",", $ids);
     $sql = "SELECT * FROM productos WHERE $pk IN ($idsList)";
     $result = $conn->query($sql);
 
     $productosEnCarrito = [];
     $total = 0;
-    $productosMap = []; // id => row (para facilitar cálculos)
     while ($row = $result->fetch_assoc()) {
         $idRow = $row[$pk] ?? ($row['id'] ?? ($row['id_producto'] ?? null));
         $cantidad = $carrito[$idRow] ?? 0;
@@ -46,65 +58,9 @@ if (empty($carrito)) {
         $row['subtotal'] = $subtotal;
         $productosEnCarrito[] = $row;
         $total += $subtotal;
-        $productosMap[$idRow] = $row;
     }
-
-    // DETECCIÓN Y APLICACIÓN DE COMBOS (evitar doble uso de unidades)
-    $descuentoTotal = 0;
-    $alertas = [];
-
-    // obtener combos y sus productos (GROUP_CONCAT facilita)
-    $sqlCombos = "SELECT c.id, c.nombre, c.descuento, GROUP_CONCAT(cp.producto_id) AS productos
-                  FROM combos c
-                  JOIN combo_productos cp ON cp.combo_id = c.id
-                  GROUP BY c.id";
-    $resComb = $conn->query($sqlCombos);
-
-    // copia de cantidades disponibles para evitar reutilizar unidades entre combos
-    $available = $carrito;
-
-    while ($combo = $resComb->fetch_assoc()) {
-        $comboId = (int)$combo['id'];
-        $comboName = $combo['nombre'];
-        $comboDesc = floatval($combo['descuento']); // porcentaje
-        $prodList = array_map('intval', explode(',', $combo['productos']));
-
-        // determinar cuántas veces (veces entero >=1) puede aplicarse el combo según cantidades disponibles
-        $timesPossible = PHP_INT_MAX;
-        foreach ($prodList as $pid) {
-            $qtyAvailable = $available[$pid] ?? 0;
-            // asumimos 1 unidad requerida por producto en el combo
-            $timesPossible = min($timesPossible, $qtyAvailable);
-        }
-        if ($timesPossible === PHP_INT_MAX || $timesPossible <= 0) {
-            continue; // no se puede aplicar este combo
-        }
-
-        // aplicar combo 'timesPossible' veces
-        $subtotalCombo = 0;
-        foreach ($prodList as $pid) {
-            // si ese producto no está en el mapa (tal vez producto ya no existe), saltar combo
-            if (!isset($productosMap[$pid])) {
-                $subtotalCombo = 0;
-                break;
-            }
-            $precioProd = $productosMap[$pid]['precio'];
-            $subtotalCombo += $precioProd * 1 * $timesPossible; // 1 unidad por producto * veces
-        }
-        if ($subtotalCombo <= 0) continue;
-
-        // calcular descuento
-        $discountAmount = $subtotalCombo * ($comboDesc / 100.0);
-        $descuentoTotal += $discountAmount;
-
-        // decrementar cantidades disponibles (para evitar reutilizar las mismas unidades en otro combo)
-        foreach ($prodList as $pid) {
-            $available[$pid] = max(0, $available[$pid] - $timesPossible);
-        }
-
-        // Alerta: si se aplicó una o más veces
-        $alertas[] = "🎉 ¡Combo detectado!: {$comboName} x{$timesPossible} ({$comboDesc}% off)";
-    }
+    $total_final = $total;
+    $bono = $total_final * 0.10;
 }
 ?>
 <!DOCTYPE html>
@@ -120,16 +76,38 @@ if (empty($carrito)) {
 </header>
 
 <main>
-    <a href="index.php" class="btn">← Seguir comprando</a>
-    <a href="carrito.php?action=clear" class="btn" style="margin-left:10px;background:#444;">Vaciar carrito</a>
+    <div class="cart-actions">
+        <a href="index.php" class="btn btn-cart">← Seguir comprando</a>
+        <a href="carrito.php?action=clear" class="btn btn-cart btn-clear">Vaciar carrito</a>
+    </div>
     <hr>
 
-<?php if (empty($productosEnCarrito)): ?>
+<?php if ($compraRealizada): ?>
+    <div class="loading" id="loadingAnim">Procesando pago...</div>
+    <script>
+        setTimeout(function(){
+            document.getElementById('loadingAnim').style.display = 'none';
+            document.getElementById('compraExito').style.display = 'block';
+            document.getElementById('codigosList').style.display = 'block';
+        }, 3000);
+    </script>
+    <div id="compraExito" class="compra-exito" style="display:none;">
+        ¡Compra realizada correctamente!<br>
+        Tus códigos de juego:
+    </div>
+    <div id="codigosList" class="codigos-list" style="display:none;">
+        <?php foreach ($codigosGenerados as $codigo): ?>
+            <div class="codigo-item"><?php echo $codigo; ?></div>
+        <?php endforeach; ?>
+        <div class="bono-info">
+            Has recibido un bono del 10% de tu compra: <strong>$<?php echo number_format($bono,2); ?></strong>
+        </div>
+    </div>
+<?php elseif (empty($productosEnCarrito)): ?>
     <p>No hay productos en el carrito.</p>
 <?php else: ?>
     <ul class="cart-list">
         <?php foreach ($productosEnCarrito as $p): 
-            // detectar id del producto en la fila
             $idRow = $p['id'] ?? ($p['id_producto'] ?? ($p['ID_producto'] ?? null));
             $img = (!empty($p['imagen']) && file_exists($p['imagen'])) ? $p['imagen'] : 'images/placeholder.png';
         ?>
@@ -142,19 +120,20 @@ if (empty($carrito)) {
         <?php endforeach; ?>
     </ul>
 
-    <?php if (!empty($alertas)): ?>
-        <?php foreach ($alertas as $a): ?>
-            <div class="combo-alert"><?php echo $a; ?></div>
-        <?php endforeach; ?>
-    <?php endif; ?>
-
     <p><strong>Total: $<?php echo number_format($total,2); ?></strong></p>
+    <div class="bono-info">
+        Por tu compra recibirás un bono del 10%: <strong>$<?php echo number_format($bono,2); ?></strong>
+    </div>
 
-    <?php if (!empty($descuentoTotal) && $descuentoTotal > 0): ?>
-        <p class="descuento">Descuento combos: -$<?php echo number_format($descuentoTotal,2); ?></p>
-        <p class="final">Total con descuento: $<?php echo number_format($total - $descuentoTotal,2); ?></p>
-    <?php endif; ?>
-
+    <div class="pago-info">¿Cómo deseas pagar?</div>
+    <form method="post" id="formPago">
+        <input type="hidden" name="total_final" value="<?php echo $total_final ?? $total; ?>">
+        <div class="pago-metodos">
+            <button type="submit" name="metodo_pago" value="tarjeta" class="pago-btn btn">Tarjeta de crédito/débito</button>
+            <button type="submit" name="metodo_pago" value="paypal" class="pago-btn btn">PayPal</button>
+            <button type="submit" name="metodo_pago" value="tienda" class="pago-btn btn">Pago en tienda</button>
+        </div>
+    </form>
 <?php endif; ?>
 </main>
 
