@@ -81,12 +81,12 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                     </div>
                 </li>
 
-                <li><a href="carrito.php">🛒 Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+                <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
             </ul>
         </nav>
 
         <div class="user-login">
-            <a href="login.php" class="btn-login">👤 Iniciar Sesión</a>
+            <a href="login.php" class="btn-login">Iniciar Sesión</a>
         </div>
     </div>
 </header>
