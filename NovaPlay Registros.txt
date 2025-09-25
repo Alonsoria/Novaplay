@@ -66,8 +66,29 @@ VALUES (
 );
 
 
--Funcionalidad Combos (Pendiente)
-Basicamente lo mismo que en productos, solo que en vez de juegos, sean suscripciones
+-Funcionalidad Combos (Listo)
+
+1.Para agregar combos, desde la tabla de combos, en el SQL hacemos la siguiente consulta;
+
+INSERT INTO combos (nombre, descripcion, precio, imagen, activo) VALUES
+('Halo Infinite + Game Pass 3 Meses', 
+ 'Incluye el juego Halo Infinite más 3 meses de Xbox Game Pass Ultimate.', 
+ 899.99, 
+ './images/combos/halo_gamepass.png', 
+ 1),
+
+('Minecraft + DLC Starter Pack', 
+ 'Paquete que incluye Minecraft base junto con el DLC Starter Pack.', 
+ 499.99, 
+ './images/combos/minecraft_dlc.png', 
+ 1),
+
+('FIFA 24 + 2100 FIFA Points', 
+ 'Incluye FIFA 24 más un paquete de 2100 FIFA Points para mejorar tu experiencia.', 
+ 1199.00, 
+ './images/combos/fifa_combo.png', 
+ 1);
+
 
 -Funcionalidad Acerca de nosotros
 Solamente agregar una descripcion de acerca de nuestra empresa y quienes somos, de ser posible, con imagenes incluidas
