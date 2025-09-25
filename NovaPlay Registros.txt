@@ -90,8 +90,6 @@ INSERT INTO combos (nombre, descripcion, precio, imagen, activo) VALUES
  1);
 
 
--Funcionalidad Acerca de nosotros
-Solamente agregar una descripcion de acerca de nuestra empresa y quienes somos, de ser posible, con imagenes incluidas
+-Funcionalidad Acerca de nosotros (Listo)
 
--Funcionalidad carrito (Pendiente)
-Funciona el agregar productos, se van sumando cuantos juegos hay, pero no dice cuanto es el precio total ni sale pagina
+-Funcionalidad carrito (Listo)

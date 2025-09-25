@@ -120,7 +120,7 @@ if (empty($carrito)) {
         <?php endforeach; ?>
     </ul>
 
-    <p><strong>Total: $<?php echo number_format($total,2); ?></strong></p>
+    <p style="display: flex; justify-content:center;"><strong>Total: $<?php echo number_format($total,2); ?></strong></p>
     <div class="bono-info">
         Por tu compra recibirás un bono del 10%: <strong>$<?php echo number_format($bono,2); ?></strong>
     </div>
@@ -129,9 +129,9 @@ if (empty($carrito)) {
     <form method="post" id="formPago">
         <input type="hidden" name="total_final" value="<?php echo $total_final ?? $total; ?>">
         <div class="pago-metodos">
-            <button type="submit" name="metodo_pago" value="tarjeta" class="pago-btn btn">Tarjeta de crédito/débito</button>
-            <button type="submit" name="metodo_pago" value="paypal" class="pago-btn btn">PayPal</button>
-            <button type="submit" name="metodo_pago" value="tienda" class="pago-btn btn">Pago en tienda</button>
+            <button type="submit" name="metodo_pago" value="tarjeta" class="pagobtn">Tarjeta de crédito/débito</button>
+            <button type="submit" name="metodo_pago" value="paypal" class="pagobtn">PayPal</button>
+            <button type="submit" name="metodo_pago" value="tienda" class="pagobtn">Pago en tienda</button>
         </div>
     </form>
 <?php endif; ?>
