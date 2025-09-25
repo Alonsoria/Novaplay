@@ -6,6 +6,7 @@ if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = [];
 }
 
+// Agregar al carrito
 if (isset($_GET['add'])) {
     $id = (int)$_GET['add'];
     if ($id > 0) {
@@ -19,12 +20,14 @@ if (isset($_GET['add'])) {
     exit;
 }
 
+// Obtener plataformas
 $platformsArr = [];
 $platRes = $conn->query("SELECT * FROM plataformas ORDER BY nombre");
 if ($platRes) {
     while ($r = $platRes->fetch_assoc()) $platformsArr[] = $r;
 }
 
+// Categorías
 $categorias = [
     "suscripcion" => "Suscripciones disponibles",
     "accesorio"   => "Accesorios disponibles",
@@ -35,8 +38,12 @@ $categorias = [
     "paquete"     => "Paquetes especiales"
 ];
 
+// Contar carrito
 $cartCount = 0;
 foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
+
+// Filtro de plataforma
+$filtroPlataforma = isset($_GET['plataforma']) ? (int)$_GET['plataforma'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -90,7 +97,16 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 <main>
     <?php
     foreach ($categorias as $clave => $titulo):
-        $sql = "SELECT * FROM productos WHERE categoria='$clave' ORDER BY nombre";
+        if ($filtroPlataforma > 0) {
+            $sql = "SELECT DISTINCT p.* 
+                    FROM productos p
+                    INNER JOIN producto_plataforma pp ON p.id_producto = pp.id_producto
+                    WHERE p.categoria='$clave' AND pp.id_plataforma=$filtroPlataforma
+                    ORDER BY p.nombre";
+        } else {
+            $sql = "SELECT * FROM productos WHERE categoria='$clave' ORDER BY nombre";
+        }
+
         $result = $conn->query($sql);
         if ($result && $result->num_rows > 0):
     ?>
