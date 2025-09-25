@@ -58,7 +58,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
             <ul>
                 <li><a href="index.php">Inicio</a></li>
                 <li><a href="productos.php">Productos</a></li>
-                <li><a href="#">Combos</a></li>
+                <li><a href="combos.php">Combos</a></li>
                 <li><a href="about_us.php">Acerca de nosotros</a></li>
 
                 <!-- MENU DE PLATAFORMAS -->
