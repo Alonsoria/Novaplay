@@ -50,6 +50,22 @@ VALUES
 -Por que está madre sale de izquierda a derecha 
 -YA JALA 
 
+-Funcionalidad productos
+
+1.Casi lo mismo que el de juegos, solo que esta consulta está hecha para productos
+
+INSERT INTO productos (nombre, descripcion, categoria, precio, stock, codigo_digital, imagen)
+VALUES (
+    'PlayStation Store Card $500 MXN',
+    'Recarga tu monedero de PSN con $500 pesos mexicanos',
+    'tarjeta', (Esta parte se irá cambiando dependiendo que sea, si tarjeta, suscripcion, etc)
+    500.00,
+    100,
+    1,
+    './images/productos/(PLACEHOLDER).png'
+);
+
+
 -Funcionalidad Combos (Pendiente)
 Basicamente lo mismo que en productos, solo que en vez de juegos, sean suscripciones
 

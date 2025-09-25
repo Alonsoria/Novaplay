@@ -305,13 +305,11 @@ footer p { margin: 0; opacity: 0.8; }
     transition: all 0.3s ease;
 }
 
-/* El del centro más grande y con más opacidad */
 .swiper-slide-active img {
     transform: scale(1.3);
     opacity: 1;
 }
 
-/* Laterales más pequeños y transparentes */
 .swiper-slide-prev img,
 .swiper-slide-next img {
     transform: scale(1.1);
