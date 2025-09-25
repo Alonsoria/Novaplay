@@ -87,10 +87,6 @@ $filtroPlataforma = isset($_GET['plataforma']) ? (int)$_GET['plataforma'] : 0;
                 <li><a href="carrito.php">🛒 Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
             </ul>
         </nav>
-
-        <div class="user-login">
-            <a href="login.php" class="btn-login">👤 Iniciar Sesión</a>
-        </div>
     </div>
 </header>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2025 a las 00:48:02
+-- Tiempo de generación: 25-09-2025 a las 06:44:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,7 +32,29 @@ CREATE TABLE `combos` (
   `nombre` varchar(150) NOT NULL,
   `descripcion` text DEFAULT NULL,
   `precio` decimal(10,2) NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
   `activo` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `combos`
+--
+
+INSERT INTO `combos` (`id_combo`, `nombre`, `descripcion`, `precio`, `imagen`, `activo`) VALUES
+(1, 'Halo Infinite + Game Pass 3 Meses', 'Incluye el juego Halo Infinite más 3 meses de Xbox Game Pass Ultimate.', 899.99, './images/combos/halo_gamepass.png', 1),
+(2, 'Mario Oddyssey + Animal Crossing', 'Paquete que incluye Minecraft base junto con el juego de Animal Crossing.', 499.99, './images/combos/minecraft_animal.png', 1),
+(3, 'FIFA 24 + 3 Playstation Plus Deluxe 3 meses', 'Incluye FIFA 24 más una tarjeta de 3 meses de PlayStation Plus Deluxe.', 1199.00, './images/combos/fifa_combo.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `combo_relacion`
+--
+
+CREATE TABLE `combo_relacion` (
+  `id_relacion` int(11) NOT NULL,
+  `id_combo` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,8 +118,7 @@ INSERT INTO `plataformas` (`id_plataforma`, `nombre`, `icono`) VALUES
 (1, 'Xbox', './images/plataformas/xboxlogo.png'),
 (2, 'PlayStation', './images/plataformas/playstationlogo.png'),
 (3, 'Steam', './images/plataformas/steamlogo.png'),
-(4, 'Nintendo', './images/plataformas/nintendologo.png'),
-(5, 'PC', './images/plataformas/pc.png');
+(4, 'Nintendo', './images/plataformas/nintendologo.png');
 
 -- --------------------------------------------------------
 
@@ -126,7 +147,30 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `categoria`, `p
 (2, 'The Last of Us', 'Aventura y supervivencia', 'videojuego', 699.99, 0, 1, '2025-09-24 07:42:09', './images/tlou.jpg'),
 (3, 'FIFA 24', 'Simulador de fútbol de EA Sports', 'videojuego', 999.99, 0, 1, '2025-09-24 07:42:09', './images/fifa24.jpg'),
 (4, 'Minecraft', 'Juego de construcción y aventura', 'videojuego', 299.99, 0, 1, '2025-09-24 07:42:09', './images/minecraft.jpg'),
-(5, 'Friday Night Funkin', 'Impresiona a tu novia enfrentando a distintos enemigos en este juego ritmico.', 'videojuego', 399.99, 50, 1, '2025-09-24 22:34:09', './images/FridayNightFunkin2.png');
+(5, 'Friday Night Funkin', 'Impresiona a tu novia enfrentando a distintos enemigos en este juego ritmico.', 'videojuego', 399.99, 50, 1, '2025-09-24 22:34:09', './images/FridayNightFunkin2.png'),
+(6, 'Xbox Game Pass Ultimate 1 mes', 'Acceso ilimitado a juegos de Xbox y PC por 1 mes', 'suscripcion', 199.00, 50, 1, '2025-09-25 01:00:22', './images/productos/GamepassLogo.png'),
+(7, 'Cyberpunk 2077', 'Explora Night City en este RPG futurista lleno de aventuras cyberpunk.', 'videojuego', 799.99, 50, 1, '2025-09-25 01:18:53', './images/cyberpunk2077.jpg'),
+(8, 'PlayStation Plus Deluxe 1 mes', 'Acceso a online y juegos exclusivamente gratis por 1 mes', 'suscripcion', 256.00, 100, 1, '2025-09-25 01:10:41', './images/productos/Playstationplus.jpg'),
+(9, 'PlayStation Plus Deluxe 3 meses', 'Acceso a online y juegos exclusivamente gratis por 3 mes', 'suscripcion', 386.00, 100, 1, '2025-09-25 01:12:09', './images/productos/Playstationplus.jpg'),
+(10, 'PlayStation Plus Deluxe 1 año', 'Acceso a online y juegos exclusivamente gratis por 1 año', 'suscripcion', 2300.00, 100, 1, '2025-09-25 01:13:31', './images/productos/Playstationplus.jpg'),
+(11, 'Xbox Game Pass Ultimate 3 meses', 'Acceso ilimitado a juegos de Xbox y PC por 3 meses', 'suscripcion', 256.00, 100, 1, '2025-09-25 01:14:47', './images/productos/GamepassLogo.png'),
+(12, 'Xbox Game Pass Ultimate 1 año', 'Acceso ilimitado a juegos de Xbox y PC por 1 año', 'suscripcion', 1500.00, 100, 1, '2025-09-25 01:15:39', './images/productos/GamepassLogo.png'),
+(13, 'Control Inalámbrico Xbox Series X|S', 'Nuevo control Xbox con mejor ergonomía y textura antideslizante, color Rojo con Negro', 'accesorio', 1800.00, 15, 0, '2025-09-25 01:18:30', './images/productos/Xbox_controller.png'),
+(14, 'Audífonos Gamer Sonido Envolvente 7.1 Conexión USB Assault | VORTRED', 'Audifonos para cualquier tipo de consola o computadora con entrada USB', 'accesorio', 800.00, 100, 1, '2025-09-25 01:33:40', './images/productos/AudifonosVortex.png'),
+(15, 'Mouse Gamer Redragon M715Rgb-1 Dagger 2 Negro Rgb 8 Botones 10000 Dpi', 'Mouse para cualquier tipo de computadora o dispositivo capaz de soportar mouse', 'accesorio', 660.00, 100, 1, '2025-09-25 01:35:33', './images/productos/MouseGamer.png'),
+(16, 'Numskull Official Sonic the Hedgehog Gaming Locker y Estante', 'Estante del famoso videojuego Sonic the Hedgehog, soporta hasta 4 controles y headsets', 'accesorio', 500.00, 100, 1, '2025-09-25 01:45:28', './images/productos/Sonicestante.png'),
+(17, 'God of War', 'Acompaña a Kratos y Atreus en su viaje por la mitología nórdica.', 'videojuego', 799.99, 50, 1, '2025-09-25 01:18:53', './images/god_of_war.jpg'),
+(19, 'Mortal Kombat 11', 'El juego de lucha más brutal con fatalities espectaculares.', 'videojuego', 549.99, 50, 1, '2025-09-25 01:18:53', './images/mk11.jpg'),
+(20, 'Animal Crossing: New Horizons', 'Crea tu paraíso personal en una isla tropical.', 'videojuego', 899.99, 50, 1, '2025-09-25 01:18:53', './images/animal_crossing.jpg'),
+(21, 'Super Mario Odyssey', 'Únete a Mario en una aventura 3D por todo el mundo.', 'videojuego', 849.99, 50, 1, '2025-09-25 01:18:53', './images/mario_odyssey.jpg'),
+(22, 'The Legend of Zelda: Breath of the Wild', 'Explora Hyrule en la aventura más épica de Link.', 'videojuego', 899.99, 50, 1, '2025-09-25 01:18:53', './images/zelda_botw.jpg'),
+(24, 'Doom Eternal', 'Shooter frenético contra demonios del infierno.', 'videojuego', 449.99, 50, 1, '2025-09-25 01:18:53', './images/doom_eternal.jpg'),
+(25, 'Resident Evil 4', 'Horror y supervivencia en su máxima expresión.', 'videojuego', 699.99, 50, 1, '2025-09-25 01:18:53', './images/re4.jpg'),
+(26, 'Street Fighter 6', 'El fighting game más técnico con combos espectaculares.', 'videojuego', 899.99, 50, 1, '2025-09-25 01:18:53', './images/sf6.jpg'),
+(27, 'Elden Ring', 'RPG de mundo abierto de los creadores de Dark Souls.', 'videojuego', 999.99, 50, 1, '2025-09-25 01:18:53', './images/elden_ring.jpg'),
+(28, 'Hogwarts Legacy', 'Vive tu propia aventura mágica en el mundo de Harry Potter.', 'videojuego', 1099.99, 50, 1, '2025-09-25 01:18:53', './images/hogwarts_legacy.jpg'),
+(29, 'Stray', 'Aventura como un gato callejero en una ciudad cyberpunk.', 'videojuego', 449.99, 50, 1, '2025-09-25 01:18:53', './images/stray.jpg'),
+(30, 'It Takes Two', 'Aventura cooperativa que debes jugar en pareja.', 'videojuego', 599.99, 50, 1, '2025-09-25 01:18:53', './images/it_takes_two.jpg');
 
 -- --------------------------------------------------------
 
@@ -145,16 +189,65 @@ CREATE TABLE `producto_plataforma` (
 
 INSERT INTO `producto_plataforma` (`id_producto`, `id_plataforma`) VALUES
 (1, 1),
-(1, 5),
 (2, 2),
 (3, 1),
 (3, 2),
 (3, 3),
 (4, 4),
-(4, 5),
 (5, 1),
 (5, 2),
-(5, 3);
+(5, 3),
+(6, 1),
+(7, 1),
+(7, 3),
+(8, 2),
+(9, 2),
+(10, 2),
+(11, 1),
+(12, 1),
+(13, 1),
+(13, 3),
+(14, 1),
+(14, 2),
+(14, 3),
+(14, 4),
+(15, 1),
+(15, 2),
+(15, 3),
+(16, 1),
+(16, 2),
+(16, 3),
+(16, 4),
+(17, 2),
+(17, 3),
+(19, 1),
+(19, 2),
+(19, 3),
+(19, 4),
+(20, 4),
+(21, 4),
+(22, 4),
+(24, 1),
+(24, 2),
+(24, 3),
+(24, 4),
+(25, 1),
+(25, 2),
+(25, 3),
+(26, 1),
+(26, 2),
+(26, 3),
+(27, 1),
+(27, 3),
+(28, 1),
+(28, 2),
+(28, 3),
+(28, 4),
+(29, 2),
+(29, 3),
+(30, 1),
+(30, 2),
+(30, 3);
 
 -- --------------------------------------------------------
 
@@ -183,6 +276,14 @@ CREATE TABLE `usuarios` (
 --
 ALTER TABLE `combos`
   ADD PRIMARY KEY (`id_combo`);
+
+--
+-- Indices de la tabla `combo_relacion`
+--
+ALTER TABLE `combo_relacion`
+  ADD PRIMARY KEY (`id_relacion`),
+  ADD KEY `id_combo` (`id_combo`),
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `fidelizacion`
@@ -239,7 +340,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `combos`
 --
 ALTER TABLE `combos`
-  MODIFY `id_combo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_combo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `combo_relacion`
+--
+ALTER TABLE `combo_relacion`
+  MODIFY `id_relacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `fidelizacion`
@@ -269,7 +376,7 @@ ALTER TABLE `plataformas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -280,6 +387,13 @@ ALTER TABLE `usuarios`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `combo_relacion`
+--
+ALTER TABLE `combo_relacion`
+  ADD CONSTRAINT `combo_relacion_ibfk_1` FOREIGN KEY (`id_combo`) REFERENCES `combos` (`id_combo`) ON DELETE CASCADE,
+  ADD CONSTRAINT `combo_relacion_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `fidelizacion`
