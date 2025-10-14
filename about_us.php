@@ -79,7 +79,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         </div>
         <div class="aboutus-grid">
             <div class="aboutus-img">
-                <img src="./images/about2.jpg" alt="Imagen de equipo" class="aboutus-photo">
+                <img src="./images/Imagen de WhatsApp 2025-09-25 a las 11.33.34_b0aaa998.jpg" alt="Imagen de equipo" class="aboutus-photo">
             </div>
             <div class="aboutus-text">
                 <h2 class="aboutus-subtitle">Nuestro Equipo</h2>

@@ -26,38 +26,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['metodo_pago'])) {
     unset($_SESSION['carrito']); // Vacía el carrito tras compra
 }
 
-if (empty($carrito)) {
-    $productosEnCarrito = [];
-    $total = 0;
-    $total_final = 0;
+$productosEnCarrito = [];
+$total = 0;
+$total_final = 0;
+
+// Detectar columna PK en productos
+$pk = null;
+$res1 = $conn->query("SHOW COLUMNS FROM productos LIKE 'id'");
+if ($res1 && $res1->num_rows > 0) {
+    $pk = 'id';
 } else {
-    // detectar columna PK en productos
-    $pk = null;
-    $res1 = $conn->query("SHOW COLUMNS FROM productos LIKE 'id'");
-    if ($res1 && $res1->num_rows > 0) {
-        $pk = 'id';
-    } else {
-        $res2 = $conn->query("SHOW COLUMNS FROM productos LIKE 'id_producto'");
-        if ($res2 && $res2->num_rows > 0) {
-            $pk = 'id_producto';
-        }
+    $res2 = $conn->query("SHOW COLUMNS FROM productos LIKE 'id_producto'");
+    if ($res2 && $res2->num_rows > 0) {
+        $pk = 'id_producto';
     }
+}
 
-    $ids = array_map('intval', array_keys($carrito));
-    $idsList = implode(",", $ids);
-    $sql = "SELECT * FROM productos WHERE $pk IN ($idsList)";
-    $result = $conn->query($sql);
-
-    $productosEnCarrito = [];
-    $total = 0;
-    while ($row = $result->fetch_assoc()) {
-        $idRow = $row[$pk] ?? ($row['id'] ?? ($row['id_producto'] ?? null));
-        $cantidad = $carrito[$idRow] ?? 0;
-        $subtotal = $row['precio'] * $cantidad;
-        $row['cantidad'] = $cantidad;
-        $row['subtotal'] = $subtotal;
-        $productosEnCarrito[] = $row;
-        $total += $subtotal;
+if (!empty($carrito)) {
+    foreach ($carrito as $key => $cantidad) {
+        if (strpos($key, 'combo_') === 0) {
+            // Es un combo
+            $idCombo = (int)str_replace('combo_', '', $key);
+            $sqlCombo = "SELECT * FROM combos WHERE id_combo = $idCombo";
+            $resCombo = $conn->query($sqlCombo);
+            if ($combo = $resCombo->fetch_assoc()) {
+                $combo['cantidad'] = $cantidad;
+                $combo['subtotal'] = $combo['precio'] * $cantidad;
+                $combo['es_combo'] = true;
+                $productosEnCarrito[] = $combo;
+                $total += $combo['subtotal'];
+            }
+        } else {
+            // Es un producto normal
+            $idProd = (int)$key;
+            $sqlProd = "SELECT * FROM productos WHERE $pk = $idProd";
+            $resProd = $conn->query($sqlProd);
+            if ($prod = $resProd->fetch_assoc()) {
+                $prod['cantidad'] = $cantidad;
+                $prod['subtotal'] = $prod['precio'] * $cantidad;
+                $prod['es_combo'] = false;
+                $productosEnCarrito[] = $prod;
+                $total += $prod['subtotal'];
+            }
+        }
     }
     $total_final = $total;
     $bono = $total_final * 0.10;
@@ -108,12 +119,14 @@ if (empty($carrito)) {
 <?php else: ?>
     <ul class="cart-list">
         <?php foreach ($productosEnCarrito as $p): 
-            $idRow = $p['id'] ?? ($p['id_producto'] ?? ($p['ID_producto'] ?? null));
             $img = (!empty($p['imagen']) && file_exists($p['imagen'])) ? $p['imagen'] : 'images/placeholder.png';
         ?>
             <li>
                 <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($p['nombre']); ?>" class="cart-img">
-                <strong><?php echo htmlspecialchars($p['nombre']); ?></strong>
+                <strong>
+                    <?php echo htmlspecialchars($p['nombre']); ?>
+                    <?php if (!empty($p['es_combo'])): ?> <span style="color:#ffcc00;">(Combo)</span><?php endif; ?>
+                </strong>
                 (x<?php echo $p['cantidad']; ?>)
                 - $<?php echo number_format($p['subtotal'], 2); ?>
             </li>
