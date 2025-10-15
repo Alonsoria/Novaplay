@@ -40,16 +40,17 @@ $result = $conn->query($sql);
 $cartCount = 0;
 foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Novaplay</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./privacidad.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
-<body>
+
 <header>
     <div class="header-container">
         <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
@@ -87,56 +88,14 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     </div>
 </header>
 
-<main>
-    <section class="carrusel-destacados">
-        <h2>Juegos Destacados</h2>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="./images/gta.jpg" alt="GTA V"></div>
-                <div class="swiper-slide"><img src="./images/tlou.jpg" alt="The Last of Us"></div>
-                <div class="swiper-slide"><img src="./images/fifa24.jpg" alt="FIFA 24"></div>
-                <div class="swiper-slide"><img src="./images/minecraft.jpg" alt="Minecraft"></div>
-                <div class="swiper-slide"><img src="./images/Halo_infinite.png" alt="Halo Infinite"></div>
-            </div>
-
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-    </section>
-
-
-    <h2>Catálogo de Productos</h2>
-    <div class="grid">
-        <?php while($row = $result->fetch_assoc()) {
-            $idProd = (int)$row['id_producto'];
-            $imgPath = (!empty($row['imagen']) && file_exists($row['imagen'])) ? $row['imagen'] : './images/placeholder.png';
-        ?>
-            <div class="card">
-                <img src="<?php echo htmlspecialchars($imgPath); ?>" alt="<?php echo htmlspecialchars($row['nombre']); ?>" class="product-img">
-                <h3><?php echo htmlspecialchars($row['nombre']); ?></h3>
-                <p><?php echo htmlspecialchars($row['descripcion']); ?></p>
-                <p><strong>$<?php echo number_format($row['precio'],2); ?></strong></p>
-
-                <div class="plat-list">
-                    <?php
-                        $pSql = "SELECT pl.* FROM plataformas pl
-                                 INNER JOIN producto_plataforma pp ON pl.id_plataforma = pp.id_plataforma
-                                 WHERE pp.id_producto = $idProd";
-                        $pRes = $conn->query($pSql);
-                        while ($pRow = $pRes->fetch_assoc()) {
-                            $icon = !empty($pRow['icono']) ? $pRow['icono'] : './images/platforms/placeholder.png';
-                            echo '<img src="'.htmlspecialchars($icon).'" alt="'.htmlspecialchars($pRow['nombre']).'" title="'.htmlspecialchars($pRow['nombre']).'" class="plat-thumb">';
-                        }
-                    ?>
-                </div>
-
-                <a href="index.php?add=<?php echo $idProd; ?>" class="btn">Agregar</a>
-            </div>
-        <?php } ?>
+<body class="legal-body">
+    <div class="legal-container">
+        <h2>Política de Cookies</h2>
+        <p>Este sitio utiliza cookies propias y de terceros para mejorar su experiencia, analizar el tráfico y personalizar contenido. Puede aceptar o rechazar su uso desde la configuración de su navegador.</p>
+        <p>Las cookies se utilizan con fines funcionales, analíticos y publicitarios, respetando su privacidad en todo momento.</p>
+        <p>Al continuar navegando en <strong>Novaplay</strong>, usted acepta nuestra Política de Cookies y el tratamiento de los datos conforme al Aviso de Privacidad.</p>
+        <a href="index.php" class="btn btn-cart">← Seguir comprando</a>
     </div>
-</main>
-
-    
 
 <footer class="footer">
     <div class="footer-container">
@@ -152,40 +111,8 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
             La información proporcionada será tratada conforme a nuestro Aviso de Privacidad.
         </p>
     </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-var swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 2, 
-    loop: true,
-    coverflowEffect: {
-        rotate: 0,      
-        stretch: -30,   
-        depth: 250,    
-        modifier: 2,    
-        slideShadows: false,
-    },
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    }
-});
-
-
-
-
-</script>
-
-<!-- JS Toggle submenu -->
-<script>
+    <script>
 (function(){
     const toggle = document.getElementById('platformToggle');
     const menu = document.getElementById('platformMenu');
@@ -218,5 +145,7 @@ var swiper = new Swiper(".mySwiper", {
     });
 })();
 </script>
+
+</footer>
 </body>
 </html>

@@ -167,6 +167,20 @@ footer p { margin: 0; opacity: 0.8; }
     color: white;
 }
 
+/* ---- Enlaces del footer ---- */
+.footer-links a {
+    color: #ffffff; /* color normal */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #d60d7b; /* color al pasar el mouse */
+}
+
+.footer-links a:visited {
+    color: #ffffff; /* evita el morado de enlaces visitados */
+}
 
 
 /* Imágenes y carrito styles */
@@ -354,7 +368,7 @@ footer p { margin: 0; opacity: 0.8; }
     align-items: center;
     gap: 40px;
     margin-bottom: 40px;
-    background: #1a1a2e;
+    background: #0f0f1a;
     border-radius: 18px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     padding: 32px 24px;
@@ -606,3 +620,33 @@ footer {
 }
 
 /* --- Fin Carrito Styles --- */
+
+/* --- Estilos para las páginas legales --- */
+
+.legal-container {
+    max-width: 800px;
+    background: #1a1a2e;
+    border-radius: 14px;
+    padding: 40px;
+    box-shadow: 0 0 15px rgba(214,13,123,0.3);
+    text-align: center;
+    margin: 60px auto;
+    color: #fff;
+    line-height: 1.7;
+}
+
+.legal-container h2 {
+    color: #d60d7b;
+    text-shadow: 0 0 10px #8a0589;
+    margin-bottom: 20px;
+}
+
+.legal-container p {
+    font-size: 1.1em;
+    margin-bottom: 16px;
+}
+
+.legal-container a.btn-cart {
+    display: inline-block;
+    margin-top: 20px;
+}
