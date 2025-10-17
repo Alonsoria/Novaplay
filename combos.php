@@ -38,6 +38,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <title>Combos - Novaplay</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./images/novaplay icono.png">
 </head>
 <body>
 <header>

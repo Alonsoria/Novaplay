@@ -80,6 +80,7 @@ if (!empty($carrito)) {
     <meta charset="UTF-8">
     <title>Carrito - Novaplay</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./images/novaplay icono.png">
 </head>
 <body>
 <header>

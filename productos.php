@@ -52,6 +52,8 @@ $filtroPlataforma = isset($_GET['plataforma']) ? (int)$_GET['plataforma'] : 0;
     <title>Novaplay - Productos</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./images/novaplay icono.png">
+
 </head>
 <body>
 <header>
