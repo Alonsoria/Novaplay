@@ -144,7 +144,9 @@ if (!empty($carrito)) {
         <input type="hidden" name="total_final" value="<?php echo $total_final ?? $total; ?>">
         <div class="pago-metodos">
             <button type="submit" name="metodo_pago" value="tarjeta" class="pagobtn">Tarjeta de crédito/débito</button>
-            <button type="submit" name="metodo_pago" value="paypal" class="pagobtn">PayPal</button>
+            <a href="crear_pago.php?total=<?php echo $total_final ?? $total; ?>" class="pagobtn" style="text-decoration:none; text-align:center; display:inline-block;">
+                Pagar con PayPal
+            </a>
             <button type="submit" name="metodo_pago" value="tienda" class="pagobtn">Pago en tienda</button>
         </div>
     </form>
