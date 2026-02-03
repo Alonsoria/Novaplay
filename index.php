@@ -85,6 +85,9 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                 <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
             </ul>
         </nav>
+        <div class="user-login">
+            <a href="login.php" id="headerLoginBtn" class="btn-login">Iniciar sesión</a>
+        </div>
     </div>
 </header>
 
@@ -154,6 +157,37 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         </p>
     </div>
 </footer>
+
+<!-- Modal: login required -->
+<div id="loginRequiredModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-content">
+        <button class="modal-close" aria-label="Cerrar">✕</button>
+        <h3>Necesitas iniciar sesión</h3>
+        <p>Debes iniciar sesión para agregar productos al carrito.</p>
+        <div class="modal-actions">
+            <button id="modalLoginBtn" class="btn-login">Iniciar sesión</button>
+            <button id="modalContinueBtn" class="btn">Seguir viendo</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+    function isLogged() { return !!localStorage.getItem('novaplay_user'); }
+    const headerBtn = document.getElementById('headerLoginBtn');
+    function updateHeader() {
+        if (!headerBtn) return;
+        if (isLogged()) {
+            headerBtn.textContent = 'Cerrar sesión';
+            headerBtn.href = '#';
+            headerBtn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('novaplay_user'); location.reload(); });
+        } else {
+            headerBtn.textContent = 'Iniciar sesión';
+            headerBtn.href = 'login.php';
+        }
+    }
+})
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
