@@ -815,56 +815,57 @@ footer {
 /* --- barra lateral --- */
 .sidebar {
   background: #15152D;
-  opacity: 0.5;
+  opacity: 0.5; /* Estado inicial transparente */
   border-radius: 12px;
   position: fixed;
   top: 50%;
-  left: 20px;                /* izquierda */
+  left: 20px;
   transform: translateY(-50%);
 
   display: flex;
   flex-direction: column;
   gap: 18px;
+  padding: 5px; /* Espaciado interno opcional para que no pegue al borde */
 
   z-index: 999;
+  
+  /* TRANSICIÓN: Esto hace que la opacidad cambie suavemente */
+  transition: opacity 0.3s ease;
+}
+
+/* LA CLAVE: Cambia la opacidad de la barra completa al pasar el mouse */
+.sidebar:hover {
+  opacity: 1;
 }
 
 .sidebar-icon {
   width: 48px;
   height: 48px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-
   color: #fff;
   font-size: 20px;
   text-decoration: none;
-
   transition: all 0.25s ease;
 }
 
 .sidebar-icon:hover {
   background: linear-gradient(135deg, #d60d7b, #8a0589);
   transform: scale(1.1);
-  opacity: 100%;
 }
 
 /* Botón del icono */
 .icon {
   width: 48px;
   height: 48px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-
   transition: all 0.3s ease;
 }
 
@@ -874,9 +875,10 @@ footer {
   height: 24px;
   fill: none;
   stroke-width: 1.8;
+  transition: transform 0.3s ease;
 }
 
-/* Hover */
+/* Hover en iconos individuales */
 .icon:hover {
   background: linear-gradient(135deg, #d60d7b, #8a0589);
   transform: scale(1.1);
@@ -886,12 +888,11 @@ footer {
   transform: scale(1.2);
 }
 
-/* Contenido */
+/* Contenido principal */
 .content {
   margin-left: 120px;
   padding: 40px;
 }
-
 
 
 /* --- Fin Carrito Styles --- */
