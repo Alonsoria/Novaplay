@@ -53,14 +53,18 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 <body>
 <header>
     <div class="header-container">
-        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-
         <nav class="navbar">
             <ul>
-                <li><a href="index.php">Inicio</a></li>
                 <li><a href="productos.php">Productos</a></li>
                 <li><a href="combos.php">Combos</a></li>
                 <li><a href="about_us.php">Acerca de nosotros</a></li>
+
+                <!-- LOGO -->
+                <li class="logo-item">
+                    <a href="index.php">
+                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
+                    </a>
+                </li>
 
                 <!-- MENU DE PLATAFORMAS -->
                 <li class="platforms-wrapper">
@@ -73,7 +77,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                             <?php foreach($platformsArr as $plat): ?>
                                 <li>
                                     <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"> 
+                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
                                         <?php echo htmlspecialchars($plat['nombre']); ?>
                                     </a>
                                 </li>
@@ -82,14 +86,46 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                     </div>
                 </li>
 
-                <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+                <li>
+                    <a href="carrito.php">
+                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
+                    </a>
+                </li>
+
+                <!-- LOGIN -->
+                <li class="login-item">
+                    <a href="login.php" class="login-btn">Login</a>
+                </li>
             </ul>
         </nav>
-        <div class="user-login">
-            <a href="login.php" id="headerLoginBtn" class="btn-login">Iniciar sesión</a>
-        </div>
     </div>
 </header>
+
+
+<section class="hero">
+
+  <!-- LOGO DECORATIVO (DETRÁS DE SPLASHES) -->
+  <img src="./images/TOTKlogo.png" class="hero-bg-image" alt="">
+
+  <!-- SPLASHES -->
+  <img src="./images/ManchaNeon2k.png" class="splash splash-1" alt="">
+  <img src="./images/ManchaNeon2k.png" class="splash splash-2" alt="">
+
+  <!-- TEXTO -->
+  <div class="contenidoJuego">
+    <h1>THE LEGEND OF ZELDA</h1>
+    <h2>TEARS OF THE KINGDOM</h2>
+    <p>
+      Conviértete en el héroe que Hyrule necesita
+      y explora un mundo lleno de misterio.
+    </p>
+    <button>VER JUEGO</button>
+  </div>
+
+  <!-- PERSONAJE -->
+  <img src="./images/linkTOTK.png" class="hero-character" alt="Link">
+
+</section>
 
 <main>
     <section class="carrusel-destacados">
