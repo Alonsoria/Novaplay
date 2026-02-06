@@ -29,14 +29,18 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 <body>
 <header>
     <div class="header-container">
-        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-
         <nav class="navbar">
             <ul>
-                <li><a href="index.php">Inicio</a></li>
                 <li><a href="productos.php">Productos</a></li>
                 <li><a href="combos.php">Combos</a></li>
                 <li><a href="about_us.php">Acerca de nosotros</a></li>
+
+                <!-- LOGO -->
+                <li class="logo-item">
+                    <a href="index.php">
+                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
+                    </a>
+                </li>
 
                 <!-- MENU DE PLATAFORMAS -->
                 <li class="platforms-wrapper">
@@ -49,7 +53,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                             <?php foreach($platformsArr as $plat): ?>
                                 <li>
                                     <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"> 
+                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
                                         <?php echo htmlspecialchars($plat['nombre']); ?>
                                     </a>
                                 </li>
@@ -58,7 +62,16 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                     </div>
                 </li>
 
-                <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+                <li>
+                    <a href="carrito.php">
+                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
+                    </a>
+                </li>
+
+                <!-- LOGIN -->
+                <li class="login-item">
+                    <a href="login.php" class="login-btn">Login</a>
+                </li>
             </ul>
         </nav>
     </div>

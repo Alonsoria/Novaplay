@@ -93,3 +93,8 @@ INSERT INTO combos (nombre, descripcion, precio, imagen, activo) VALUES
 -Funcionalidad Acerca de nosotros (Listo)
 
 -Funcionalidad carrito (Listo)
+
+06/02/2026
+
+-Nueva funcionalidad de suscripciones 
+-Que las tarjetas tengan un id y precio unico, así cuando el usuario haga click en agregar al carrito este se guarde 

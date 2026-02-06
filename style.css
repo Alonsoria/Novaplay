@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
 /* --------- BASE --------- */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0f0f1a; 
+    font-family: 'Gugi', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f1a;
     margin: 0;
     padding: 0;
     color: #fff;
@@ -10,25 +12,28 @@ body {
 /* --------- HEADER --------- */
 header {
     background: linear-gradient(to bottom, #250643, #7c0ba1);
-    padding: 15px 0 60px; 
+    padding: 0px; 
     text-align: center;
     position: relative;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.6);
 }
 
 header .logo {
     max-width: 150px;
     height: auto;
     display: block;
-    margin: 10px auto;
+    margin: 0;
     filter: drop-shadow(0 0 15px #d60d7b);
 }
 
 /* --------- NAVBAR --------- */
-.navbar { position: relative; }
+.navbar {
+    position: relative;
+}
+
 .navbar ul {
     list-style: none;
-    margin: 15px 0 0 0;
+    margin: 15px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -37,24 +42,222 @@ header .logo {
     align-items: center;
 }
 
-.navbar ul li { position: relative; }
+.navbar ul li {
+    position: relative;
+}
 
-.navbar ul li a, .platform-toggle {
+/* Links y botones iguales */
+.navbar ul li a,
+.platform-toggle,
+.login-btn {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     font-size: 16px;
-    transition: all 0.3s ease;
     background: none;
     border: none;
     cursor: pointer;
     padding: 6px 8px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Gugi', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.navbar ul li a:hover, .platform-toggle:hover {
+/* Hover uniforme */
+.navbar ul li a:hover,
+.platform-toggle:hover,
+.login-btn:hover {
     color: #d60d7b;
     text-shadow: 0 0 10px #d60d7b, 0 0 20px #7c0ba1;
 }
+
+
+/* --------- HERO --------- */
+
+.hero {
+  position: relative;
+  height: calc(100vh - 80px); /* header */
+  overflow: hidden;
+}
+
+.hero-bg-image { 
+    position: absolute; 
+    /* z-index: 1; */ 
+    width: 1000px;
+    left: -100px; 
+    top: 50%; 
+    transform: translateY(-50%) translateX(100px); 
+    opacity: 0.15; pointer-events: none; 
+    transition: opacity 1s ease-in-out;
+
+}
+
+.hero-logo-bg { 
+    position: absolute; 
+    left: 120px; 
+    top: 50%; 
+    transform: translateY(-50%);
+    opacity: 0.15;
+    z-index: 1; 
+}
+
+/*.hero-splash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at right, rgba(255,0,180,.4), transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}*/
+
+
+.contenidoJuego {
+  position: absolute;
+  z-index: 4;
+  left: 120px;
+  top: 50%;
+  transform: translateY(-50%) translateX(60px);
+  max-width: 400px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  flex-direction: column;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
+}
+
+.TituloHero{
+    margin: 10px 0px;
+
+}
+
+.parrafoHero{
+    font-family: 'Inria Serif', serif;
+    font-size: 25px;
+    margin: 10px 0px;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    margin: 10px 0px;
+    font-size: 30px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
+
+}
+
+.rating-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+    font-size: 30px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 1;
+}
+
+.stars i {
+    color: #fff; /* estrellas blancas */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+/* Fecha de lanzamiento */
+.release-date {
+    font-size: 20px;
+    margin: 6px 0;
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.date-text{
+    display: flex;
+    gap: 4px;
+    font-size: 30px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 1; 
+}
+
+ /* personaje */
+.hero-character {
+    position: absolute;
+    z-index: 5;
+    position: absolute;
+    z-index: 5;
+    width: 1000px;
+    right: 80px;
+    bottom: 0;
+    transform: translateX(250px) translateY(150px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
+}
+
+.splash-1 {
+  height: auto;
+  width: 1250px;
+  transform: translateX(-300px) translateY(-550px) scaleY(-1);
+}
+
+.splash-2 {
+  width: auto;
+  height: 1250px;
+  transform: translateX(250px) translateY(-650px) scaleY(-1) rotate(180deg);
+}
+
+
+.splash-1 { z-index: 2; }
+.splash-2 { z-index: 3; }
+
+/* Animaciónes de desvanecimiento */
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-character.animate {
+    transform: translateY(220px) scale(1.02);
+}
+
+.TituloHero,
+.parrafoHero,
+.rating-text:last-of-type {
+    transition: opacity 1s ease; /* Para que fade-out funcione */
+}
+
+
+/* boton no tan redondo*/
+.btn2 {
+    display: inline-block;
+    background: linear-gradient(90deg, #d60d7b, #8a0589);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(138,5,137,0.7);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-start;
+    font-family: 'Gugi', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.btn2:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
+}
+
 
 /* --------- LOGIN BTN --------- */
 .user-login {
@@ -499,6 +702,7 @@ footer p { margin: 0; opacity: 0.8; }
     box-shadow: 0 0 10px rgba(138,5,137,0.7);
     transition: transform 0.2s;
     position: static;
+    
 }
 
 .btn-cart:hover {
@@ -529,6 +733,7 @@ footer {
 .cart-list {
     list-style: none;
     padding: 0;
+    width: 75%;
 }
 .cart-list li {
     background: #1a1a2e;
@@ -536,14 +741,17 @@ footer {
     border-radius: 8px;
     padding: 12px;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: flex-start;
-    margin-left: 400px;
-    margin-right: 400px;
-    gap: 18px;
+    margin-left: 75px;
+    margin-right: 10px;
+    /* gap: 18px; */
     box-shadow: 0 2px 8px #7c0ba144;
+    filter: drop-shadow(0 0 55px #d60d7b);
+    border: 1px solid #ffffff; 
 }
+
 .cart-img {
     width: 60px;
     height: 60px;
@@ -619,6 +827,30 @@ footer {
     background: #444;
 }
 
+.MetodoPago{
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.metodoPago2{
+    background: #1a1a2e;
+    width: 25%;
+    margin-bottom: 12px;
+    /* margin-right: 100px; */
+    border-radius: 8px;
+    padding: 12px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 75px;
+    margin-right: 50px;
+    /* gap: 18px; */
+    box-shadow: 0 2px 8px #7c0ba144;
+    filter: drop-shadow(0 0 25px #d60d7b);
+    border: 1px solid #ffffff;
+}
 
 .cart-content {
     width: 100%;
@@ -659,9 +891,278 @@ footer {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.pago-btn:hover {
+.pagobtn:hover {
     transform: scale(1.06);
     box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
 }
 
 /* --- Fin Carrito Styles --- */
+
+
+/* --- barra lateral --- */
+.sidebar {
+  background: #15152D;
+  opacity: 0.5; 
+  border-radius: 12px;
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 5px; 
+
+  z-index: 999;
+  
+  /* Esto hace que la opacidad cambie suavemente */
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover {
+  opacity: 1;
+}
+
+.sidebar-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.sidebar-icon:hover {
+  background: linear-gradient(135deg, #d60d7b, #8a0589);
+  transform: scale(1.1);
+}
+
+/* Botón del icono */
+.icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+/* SVG */
+.icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke-width: 1.8;
+  transition: transform 0.3s ease;
+}
+
+/* Hover en iconos individuales */
+.icon:hover {
+  background: linear-gradient(135deg, #d60d7b, #8a0589);
+  transform: scale(1.1);
+}
+
+.icon:hover svg {
+  transform: scale(1.2);
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 120px;
+  padding: 40px;
+}
+
+.cart-link {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Estilo del Badge flotante */
+.cart-count-badge {
+  position: absolute;
+  /* Lo posicionamos en la esquina superior derecha del cuadro de 48px */
+  top: -2px;
+  right: -2px;
+  
+  background-color: #ff0055; 
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  
+  /* Crear un círculo perfecto */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  
+  /* Centrar el número dentro del círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Sombra para que resalte sobre el fondo oscuro de la sidebar */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  
+  /* Asegurar que el badge esté encima de todo */
+  z-index: 10;
+  pointer-events: none; /* No interfiere con el click */
+  
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover: el badge también reacciona cuando pasas el mouse por el icono */
+.cart-link:hover .cart-count-badge {
+  transform: scale(1.1);
+  background-color: #ffffff;
+  color: #d60d7b;
+}
+
+/* --------- SECCIÓN SUSCRIPCIONES --------- */
+/* --------- SUSCRIPCIONES BARAJA --------- */
+.subscriptions {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.sub-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px; /* Espacio para el desplazamiento lateral de las cartas */
+    margin-top: 40px;
+}
+
+.card-stack {
+    position: relative;
+    width: 300px;
+    height: 420px;
+    cursor: pointer;
+}
+
+.sub-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #0a0a0a;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s;
+    box-sizing: border-box;
+}
+
+/* Posicionamiento inicial de la baraja */
+.sub-card:nth-child(2) { 
+    z-index: 2; 
+    transform: translate(0, 0); 
+}
+.sub-card:nth-child(1) { 
+    z-index: 1; 
+    transform: translate(15px, -15px); opacity: 0.6; 
+}
+
+/* Colores Neón por Marca */
+.xbox { 
+    border-color: #107c10; 
+    box-shadow: 0 0 15px rgba(16, 124, 16, 0.3);
+    background: linear-gradient(90deg, #107B10, #0E6B0E);
+
+}
+.xbox .btn-sub { 
+    background: #107c10;
+}
+
+.playstation { 
+    border-color: #003791; 
+    box-shadow: 0 0 15px rgba(0, 55, 145, 0.3); 
+    background: linear-gradient(90deg, #003EAC, #00225E);
+
+}
+.playstation .btn-sub { 
+    background: #003791; 
+}
+
+.nintendo { 
+    border-color: #e60012;
+    box-shadow: 0 0 15px rgba(230, 0, 18, 0.3); 
+    background: linear-gradient(90deg, #E70011, #9E000D);
+
+}
+.nintendo .btn-sub { 
+    background: #e60012; 
+}
+
+/* Detalles internos */
+.sub-card h3 { 
+    font-size: 1.1rem; 
+    margin: 15px 0; 
+    color: #fff; height: 40px; 
+}
+.sub-card .price { 
+    font-size: 2rem; 
+    color: #ffcc00; 
+    margin-bottom: 20px; 
+}
+.sub-card .price span { 
+    font-size: 0.8rem; 
+    color: #aaa; 
+}
+.sub-card .features { 
+    list-style: none; 
+    padding: 0; 
+    text-align: left; 
+    font-size: 0.85rem; 
+    flex-grow: 1; 
+    width: 100%; 
+}
+.sub-card .features li { 
+    margin-bottom: 8px;
+     display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.badge { 
+    background: rgba(255,255,255,0.1); 
+    padding: 4px 10px; 
+    border-radius: 10px; 
+    font-size: 0.7rem; 
+}
+
+.btn-sub {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn-sub:hover { transform: scale(1.1); }
+
+/* Animación de cambio de tarjeta */
+.moving-back {
+    animation: slideAndBack 0.6s ease-in-out forwards;
+}
+
+@keyframes slideAndBack {
+    0% { transform: translate(0, 0); z-index: 5; }
+    50% { transform: translate(-130%, 20px) rotate(-10deg); z-index: 5; }
+    100% { transform: translate(15px, -15px); z-index: 1; }
+}
+
+/* --- Fin Carrito Styles --- */
+
