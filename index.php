@@ -104,47 +104,31 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 
 
 <section class="hero">
-
-  <!-- LOGO DECORATIVO (DETRÁS DE SPLASHES) -->
+  <!-- Hero dinámico -->
   <img src="./images/TOTKlogo.png" class="hero-bg-image" alt="">
-
-  <!-- SPLASHES -->
   <img src="./images/ManchaNeon2k.png" class="splash splash-1" alt="">
   <img src="./images/ManchaNeon2k.png" class="splash splash-2" alt="">
 
-  <!-- TEXTO -->
   <div class="contenidoJuego">
     <h1 class="TituloHero">THE LEGEND OF ZELDA:TEARS OF THE KINGDOM</h1>
     <div class="rating-container">
-        <span class="rating-text">Rating: </span>
-
-        <div class="stars">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-
-            <!-- estrella a la mitad -->
-            <i class="fa-solid fa-star-half-stroke"></i>
-
-        </div>
-
+      <span class="rating-text">Rating: </span>
+      <div class="stars">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star-half-stroke"></i>
+      </div>
     </div>
-
-    <span class="rating-text">Mayo 2023 </span>
-
+    <span class="rating-text">Mayo 2023</span>
     <p class="parrafoHero">
-      Conviértete en el héroe que Hyrule necesita
-      y explora un mundo lleno de misterio.
+      Conviértete en el héroe que Hyrule necesita y explora un mundo lleno de misterio.
     </p>  
     <button class="btn2">VER JUEGO</button>
-
-
   </div>
 
-  <!-- PERSONAJE -->
   <img src="./images/linkTOTK.png" class="hero-character" alt="Link">
-
 </section>
 
 <main>
@@ -417,6 +401,73 @@ var swiper = new Swiper(".mySwiper", {
         if (e.key === 'Escape') closeMenu();
     });
 })();
+
+/* Aquí van cambiando las imagenes */
+const heroSlides = [
+    {
+        bgImage: './images/TOTKlogo.png',
+        character: './images/linkTOTK.png',
+        title: 'THE LEGEND OF ZELDA: TEARS OF THE KINGDOM',
+        paragraph: 'Conviértete en el héroe que Hyrule necesita y explora un mundo lleno de misterio.',
+        rating: 'Mayo 2023'
+    },
+    {
+        bgImage: './images/fnflogo.png',
+        character: './images/BfPng2k.png',
+        title: 'Friday Night Funkin',
+        paragraph: 'Siente la música, vence a tus rivales y conquista el escenario.',
+        rating: 'Noviembre 2020'
+    },
+    {
+        bgImage: './images/sonicLogo.png',
+        character: './images/sonic.png',
+        title: 'SONIC THE HEDGEHOG 2',
+        paragraph: 'Corre a toda velocidad y detén a Dr. Robotnik.',
+        rating: 'Marzo 2022'
+    }
+];
+
+// Obtener elementos
+const heroBg = document.querySelector('.hero-bg-image');
+const heroChar = document.querySelector('.hero-character');
+const heroTitle = document.querySelector('.TituloHero');
+const heroParagraph = document.querySelector('.parrafoHero');
+const heroRating = document.querySelector('.rating-text:last-of-type');
+
+let currentSlide = 0;
+
+function fadeChange(slide) {
+    // Aplicar fade out
+    heroBg.classList.add('fade-out');
+    heroChar.classList.add('fade-out');
+    heroTitle.classList.add('fade-out');
+    heroParagraph.classList.add('fade-out');
+    heroRating.classList.add('fade-out');
+
+    // Después de la transición
+    setTimeout(() => {
+        heroBg.src = slide.bgImage;
+        heroChar.src = slide.character;
+        heroTitle.textContent = slide.title;
+        heroParagraph.textContent = slide.paragraph;
+        heroRating.textContent = slide.rating;
+
+        // Fade in
+        heroBg.classList.remove('fade-out');
+        heroChar.classList.remove('fade-out');
+        heroTitle.classList.remove('fade-out');
+        heroParagraph.classList.remove('fade-out');
+        heroRating.classList.remove('fade-out');
+    }, 1000); // coincide con la duración de transición en CSS
+}
+
+function changeHero() {
+    currentSlide = (currentSlide + 1) % heroSlides.length;
+    fadeChange(heroSlides[currentSlide]);
+}
+
+// Cambiar cada 8 segundos
+setInterval(changeHero, 5000);
 
 /* Esto es el swipe de las cartas de suscripciones */
 document.querySelectorAll('.card-stack').forEach(stack => {

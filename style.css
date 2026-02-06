@@ -179,6 +179,8 @@ header .logo {
 .splash-1 { z-index: 2; }
 .splash-2 { z-index: 3; }
 
+
+
 /* boton no tan redondo*/
 .btn2 {
     display: inline-block;
@@ -647,6 +649,7 @@ footer p { margin: 0; opacity: 0.8; }
     box-shadow: 0 0 10px rgba(138,5,137,0.7);
     transition: transform 0.2s;
     position: static;
+    
 }
 
 .btn-cart:hover {
@@ -677,6 +680,7 @@ footer {
 .cart-list {
     list-style: none;
     padding: 0;
+    width: 75%;
 }
 .cart-list li {
     background: #1a1a2e;
@@ -684,14 +688,17 @@ footer {
     border-radius: 8px;
     padding: 12px;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     justify-content: flex-start;
-    margin-left: 400px;
-    margin-right: 400px;
-    gap: 18px;
+    margin-left: 75px;
+    margin-right: 10px;
+    /* gap: 18px; */
     box-shadow: 0 2px 8px #7c0ba144;
+    filter: drop-shadow(0 0 25px #d60d7b);
+    border: 1px solid #ffffff; 
 }
+
 .cart-img {
     width: 60px;
     height: 60px;
@@ -767,6 +774,30 @@ footer {
     background: #444;
 }
 
+.MetodoPago{
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.metodoPago2{
+    background: #1a1a2e;
+    width: 25%;
+    margin-bottom: 12px;
+    /* margin-right: 100px; */
+    border-radius: 8px;
+    padding: 12px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 75px;
+    margin-right: 50px;
+    /* gap: 18px; */
+    box-shadow: 0 2px 8px #7c0ba144;
+    filter: drop-shadow(0 0 25px #d60d7b);
+    border: 1px solid #ffffff;
+}
 
 .cart-content {
     width: 100%;
@@ -807,10 +838,13 @@ footer {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.pago-btn:hover {
+.pagobtn:hover {
     transform: scale(1.06);
     box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
 }
+
+/* --- Fin Carrito Styles --- */
+
 
 /* --- barra lateral --- */
 .sidebar {
@@ -1079,3 +1113,4 @@ footer {
 }
 
 /* --- Fin Carrito Styles --- */
+
