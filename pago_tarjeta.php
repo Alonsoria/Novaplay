@@ -190,19 +190,33 @@
     });
 
     form.addEventListener('submit', (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
-      // Fake success animation
-      successMessage.style.display = 'block';
-      form.querySelector('.pay-button').disabled = true;
-      form.querySelector('.pay-button').style.opacity = '0.7';
-      form.querySelector('.pay-button').style.cursor = 'not-allowed';
-    });
+        // Crear un formulario oculto para enviar los datos a carrito.php
+        const hiddenForm = document.createElement('form');
+        hiddenForm.method = 'POST';
+        hiddenForm.action = 'carrito.php';
+
+        const totalInput = document.createElement('input');
+        totalInput.type = 'hidden';
+        totalInput.name = 'metodo_pago';
+        totalInput.value = 'tarjeta';
+        hiddenForm.appendChild(totalInput);
+
+        const compraRealizadaInput = document.createElement('input');
+        compraRealizadaInput.type = 'hidden';
+        compraRealizadaInput.name = 'compra_realizada';
+        compraRealizadaInput.value = '1';
+        hiddenForm.appendChild(compraRealizadaInput);
+
+        document.body.appendChild(hiddenForm);
+        hiddenForm.submit();
+      });
   </script>
 </body>
 </html>
