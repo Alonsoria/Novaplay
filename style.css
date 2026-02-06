@@ -110,11 +110,48 @@ header .logo {
 }*/
 
 
-.hero-content {
+.contenidoJuego {
   position: absolute;
   z-index: 4;
+  left: 120px;
+  top: 50%;
+  transform: translateY(-50%) translateX(60px);
+  max-width: 400px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  flex-direction: column;
 }
 
+.TituloHero{
+    margin: 10px 0px;
+
+}
+
+.parrafoHero{
+    font-family: 'Inria Serif', serif;
+    font-size: 25px;
+    margin: 10px 0px;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0px;
+}
+
+.rating-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+}
+
+.stars i {
+    color: #fff; /* estrellas blancas */
+    font-size: 18px;
+}
+
+ /* personaje */
 .hero-character {
     position: absolute;
     z-index: 5;
@@ -141,6 +178,30 @@ header .logo {
 
 .splash-1 { z-index: 2; }
 .splash-2 { z-index: 3; }
+
+/* boton no tan redondo*/
+.btn2 {
+    display: inline-block;
+    background: linear-gradient(90deg, #d60d7b, #8a0589);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 10px rgba(138,5,137,0.7);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-start;   /* 👈 botón alineado a la izquierda */
+    font-family: 'Gugi', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+
+.btn2:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
+}
 
 
 /* --------- LOGIN BTN --------- */
@@ -749,6 +810,19 @@ footer {
 .pago-btn:hover {
     transform: scale(1.06);
     box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
+}
+
+.sidebar {
+  position: fixed;
+  top: 50%;
+  left: 20px;                /* izquierda */
+  transform: translateY(-50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  z-index: 999;
 }
 
 

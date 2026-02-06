@@ -47,6 +47,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <title>Novaplay</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="icon" href="./images/novaplay icono.png">
 </head>
@@ -113,13 +114,32 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 
   <!-- TEXTO -->
   <div class="contenidoJuego">
-    <h1>THE LEGEND OF ZELDA</h1>
-    <h2>TEARS OF THE KINGDOM</h2>
-    <p>
+    <h1 class="TituloHero">THE LEGEND OF ZELDA:TEARS OF THE KINGDOM</h1>
+    <div class="rating-container">
+        <span class="rating-text">Rating: </span>
+
+        <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+
+            <!-- estrella a la mitad -->
+            <i class="fa-solid fa-star-half-stroke"></i>
+
+        </div>
+
+    </div>
+
+    <span class="rating-text">Mayo 2023 </span>
+
+    <p class="parrafoHero">
       Conviértete en el héroe que Hyrule necesita
       y explora un mundo lleno de misterio.
-    </p>
-    <button>VER JUEGO</button>
+    </p>  
+    <button class="btn2">VER JUEGO</button>
+
+
   </div>
 
   <!-- PERSONAJE -->
@@ -290,4 +310,21 @@ var swiper = new Swiper(".mySwiper", {
 })();
 </script>
 </body>
+
+<aside class="sidebar">
+  <a href="#" class="sidebar-icon">
+    <i class="fa-solid fa-house"></i>
+  </a>
+  <a href="#" class="sidebar-icon">
+    <i class="fa-solid fa-gamepad"></i>
+  </a>
+  <a href="#" class="sidebar-icon">
+    <i class="fa-solid fa-heart"></i>
+  </a>
+  <a href="#" class="sidebar-icon">
+    <i class="fa-solid fa-user"></i>
+  </a>
+</aside>
+
+
 </html>
