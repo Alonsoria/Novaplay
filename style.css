@@ -748,7 +748,7 @@ footer {
     margin-right: 10px;
     /* gap: 18px; */
     box-shadow: 0 2px 8px #7c0ba144;
-    filter: drop-shadow(0 0 25px #d60d7b);
+    filter: drop-shadow(0 0 50px #d60d7b);
     border: 1px solid #ffffff; 
 }
 
