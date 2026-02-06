@@ -902,7 +902,7 @@ footer {
 /* --- barra lateral --- */
 .sidebar {
   background: #15152D;
-  opacity: 0.5; /* Estado inicial transparente */
+  opacity: 0.5; 
   border-radius: 12px;
   position: fixed;
   top: 50%;
@@ -912,15 +912,14 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: 5px; /* Espaciado interno opcional para que no pegue al borde */
+  padding: 5px; 
 
   z-index: 999;
   
-  /* TRANSICIÓN: Esto hace que la opacidad cambie suavemente */
+  /* Esto hace que la opacidad cambie suavemente */
   transition: opacity 0.3s ease;
 }
 
-/* LA CLAVE: Cambia la opacidad de la barra completa al pasar el mouse */
 .sidebar:hover {
   opacity: 1;
 }
@@ -986,36 +985,25 @@ footer {
   overflow: visible !important;
 }
 
-/* Estilo del Badge flotante */
 .cart-count-badge {
   position: absolute;
-  /* Lo posicionamos en la esquina superior derecha del cuadro de 48px */
   top: -2px;
   right: -2px;
   
-  background-color: #ff0055; /* Color llamativo */
+  background-color: #ff0055; 
   color: white;
   font-family: 'Arial', sans-serif;
   font-size: 11px;
   font-weight: bold;
-  
-  /* Crear un círculo perfecto */
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  
-  /* Centrar el número dentro del círculo */
-  display: flex;
+    display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Sombra para que resalte sobre el fondo oscuro de la sidebar */
   box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-  
-  /* Asegurar que el badge esté encima de todo */
   z-index: 10;
   pointer-events: none; /* No interfiere con el click */
-  
   transition: all 0.3s ease;
 }
 
@@ -1038,7 +1026,7 @@ footer {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 60px; /* Espacio para el desplazamiento lateral de las cartas */
+    gap: 60px; 
     margin-top: 40px;
 }
 
@@ -1066,7 +1054,6 @@ footer {
     box-sizing: border-box;
 }
 
-/* Posicionamiento inicial de la baraja */
 .sub-card:nth-child(2) { 
     z-index: 2; 
     transform: translate(0, 0); 
@@ -1107,7 +1094,6 @@ footer {
     background: #e60012; 
 }
 
-/* Detalles internos */
 .sub-card h3 { 
     font-size: 1.1rem; 
     margin: 15px 0; 
