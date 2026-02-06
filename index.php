@@ -113,16 +113,17 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <h1 class="TituloHero">THE LEGEND OF ZELDA:TEARS OF THE KINGDOM</h1>
         <div class="rating-container">
             <span class="rating-text"> </span>
-            <div class="stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
+            <div class="stars"> Rating:
+                <!-- Aquí se llenarán las estrellas dinámicamente -->
+                 <i class="fa-solid fa-star"></i>
+                 <i class="fa-solid fa-star"></i>
+                 <i class="fa-solid fa-star"></i>
+                 <i class="fa-solid fa-star"></i>
+                 <i class="fa-solid fa-star-half-stroke"></i>
             </div>
             </div>
             <div class="release-date">
-            <span class="date-text"></span>
+            <span class="date-text"> Mayo 2023 </span>
         </div>
 
     <span class="rating-text"> </span>
@@ -299,11 +300,11 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <div class="footer-container">
         <p>&copy; <?php echo date("Y"); ?> Novaplay - E-commerce de Videojuegos</p>
         <div class="footer-links">
-            <a href="aviso_privacidad.php">Aviso de Privacidad</a>
+            <a href="aviso_privacidad.php" class="footer-links">Aviso de Privacidad</a>
             <span>|</span>
-            <a href="terminos_condiciones.php">Términos y Condiciones</a>
+            <a href="terminos_condiciones.php" class="footer-links">Términos y Condiciones</a>
             <span>|</span>
-            <a href="politica_cookies.php">Política de Cookies</a>
+            <a href="politica_cookies.php" class="footer-links">Política de Cookies</a>
         </div>
         <p class="footer-note">
             La información proporcionada será tratada conforme a nuestro Aviso de Privacidad.
@@ -413,7 +414,7 @@ const heroSlides = [
         character: './images/linkTOTK.png',
         title: 'THE LEGEND OF ZELDA: TEARS OF THE KINGDOM',
         paragraph: 'Conviértete en el héroe que Hyrule necesita y explora un mundo lleno de misterio.',
-        rating:4.5,          // Rating numérico
+        rating: 4.5,          // Rating numérico
         release: 'Mayo 2023'  // Fecha de lanzamiento
     },
     {
@@ -425,12 +426,12 @@ const heroSlides = [
         release: 'Noviembre 2020'
     },
     {
-        bgImage: './images/sonicLogo.png',
-        character: './images/sonic.png',
-        title: 'SONIC THE HEDGEHOG 2',
-        paragraph: 'Corre a toda velocidad y detén a Dr. Robotnik.',
+        bgImage: './images/HaloLogo.png',
+        character: './images/HaloPng.png',
+        title: 'Halo',
+        paragraph: 'Conviértete en el Spartan que cambiará el destino de la galaxia.',
         rating: 4,
-        release: 'Marzo 2022'
+        release: 'Junio 2001 '
     }
 ];
 
@@ -442,11 +443,17 @@ const heroTitle = document.querySelector('.TituloHero');
 const heroParagraph = document.querySelector('.parrafoHero');
 const heroStars = document.querySelector('.stars');
 const heroDate = document.querySelector('.date-text');
-const heroBtn = document.querySelector('.btn2'); // botón VER JUEGO
+const heroBtn = document.querySelector('.btn2');
 
 function fadeChange(slide) {
-    // Fade out simultáneo de todo
-    [heroBg, heroChar, heroTitle, heroParagraph, heroStars, heroDate, heroBtn].forEach(el => el.style.opacity = 0);
+    // Fade out
+    heroBg.style.opacity = 0;
+    heroChar.style.opacity = 0;
+    heroTitle.style.opacity = 0;
+    heroParagraph.style.opacity = 0;
+    heroStars.style.opacity = 0;
+    heroDate.style.opacity = 0;
+    heroBtn.style.opacity = 0;
 
     setTimeout(() => {
         // Cambiar contenido
@@ -454,40 +461,52 @@ function fadeChange(slide) {
         heroChar.src = slide.character;
         heroTitle.textContent = slide.title;
         heroParagraph.textContent = slide.paragraph;
-        heroDate.textContent = `Lanzamiento: ${slide.release}`;
 
-        // Renderizar rating
-        let ratingHTML = 'Rating: ';
-        const fullStars = Math.floor(slide.rating);
-        const halfStar = slide.rating % 1 >= 0.5;
-        for (let i = 0; i < fullStars; i++) ratingHTML += '<i class="fa-solid fa-star"></i>';
-        if (halfStar) ratingHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
-        for (let i = fullStars + (halfStar ? 1 : 0); i < 5; i++) ratingHTML += '<i class="fa-regular fa-star"></i>';
-        heroStars.innerHTML = ratingHTML;
+        // Ajuste especial para Halo
+        if(slide.title === "Halo") {
+            heroChar.style.width = "600px";
+            heroChar.style.right = "100px";
+            heroChar.style.bottom = "0px";
+            heroChar.style.transform = "translateX(0) translateY(0)";
+        } else {
+            heroChar.style.width = "1000px";
+            heroChar.style.right = "80px";
+            heroChar.style.bottom = "0";
+            heroChar.style.transform = "translateX(250px) translateY(150px)";
+        }
 
-        // Fade in de todo al mismo tiempo
-        [heroBg, heroChar, heroTitle, heroParagraph, heroStars, heroDate, heroBtn].forEach(el => {
-            if (el === heroBg) el.style.opacity = 0.15; // fondo semi-transparente
-            else el.style.opacity = 1;
-        });
+        // Renderizar estrellas
+        heroStars.innerHTML = 'Rating: ';
+        let fullStars = Math.floor(slide.rating);
+        let halfStar = slide.rating % 1 >= 0.5;
+        for(let i=0; i<fullStars; i++) heroStars.innerHTML += '<i class="fa-solid fa-star"></i>';
+        if(halfStar) heroStars.innerHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+        for(let i=fullStars + (halfStar ? 1 : 0); i<5; i++) heroStars.innerHTML += '<i class="fa-regular fa-star"></i>';
 
-    }, 1000); // Duración del fade out
+        heroDate.textContent = slide.release;
 
-    // Animación del personaje
+        // Fade in
+        heroBg.style.opacity = 0.15; 
+        heroChar.style.opacity = 1;
+        heroTitle.style.opacity = 1;
+        heroParagraph.style.opacity = 1;
+        heroStars.style.opacity = 1;
+        heroDate.style.opacity = 1;
+        heroBtn.style.opacity = 1;
+
+    }, 1000);
+
     heroChar.classList.add('animate');
     setTimeout(() => heroChar.classList.remove('animate'), 1000);
 }
-
-// Cambio automático de slides
-let currentSlide = 0;
-renderSlide(heroSlides[currentSlide]);
 
 function changeHero() {
     currentSlide = (currentSlide + 1) % heroSlides.length;
     fadeChange(heroSlides[currentSlide]);
 }
 
-// Cambiar cada 5 segundos
+// Cambiar cada 8 segundos
+let currentSlide = 0;
 setInterval(changeHero, 5000);
 
 /* Esto es el swipe de las cartas de suscripciones */

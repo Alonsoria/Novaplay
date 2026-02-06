@@ -144,6 +144,8 @@ header .logo {
     gap: 0px;
     margin: 10px 0px;
     font-size: 30px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
 
 }
 
@@ -241,16 +243,15 @@ header .logo {
     padding: 10px 18px;
     border-radius: 10px;
     text-decoration: none;
-    transition: all 0.25s ease;
     box-shadow: 0 0 10px rgba(138,5,137,0.7);
     border: none;
     font-size: 20px;
     cursor: pointer;
-    align-self: flex-start;   /* 👈 botón alineado a la izquierda */
+    align-self: flex-start;
     font-family: 'Gugi', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
-
 
 .btn2:hover {
     transform: scale(1.06);
