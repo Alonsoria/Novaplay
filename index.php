@@ -111,17 +111,21 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 
   <div class="contenidoJuego">
     <h1 class="TituloHero">THE LEGEND OF ZELDA:TEARS OF THE KINGDOM</h1>
-    <div class="rating-container">
-      <span class="rating-text">Rating: </span>
-      <div class="stars">
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star"></i>
-        <i class="fa-solid fa-star-half-stroke"></i>
-      </div>
-    </div>
-    <span class="rating-text">Mayo 2023</span>
+        <div class="rating-container">
+            <span class="rating-text"> </span>
+            <div class="stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+            </div>
+            </div>
+            <div class="release-date">
+            <span class="date-text"></span>
+        </div>
+
+    <span class="rating-text"> </span>
     <p class="parrafoHero">
       Conviértete en el héroe que Hyrule necesita y explora un mundo lleno de misterio.
     </p>  
@@ -409,64 +413,81 @@ const heroSlides = [
         character: './images/linkTOTK.png',
         title: 'THE LEGEND OF ZELDA: TEARS OF THE KINGDOM',
         paragraph: 'Conviértete en el héroe que Hyrule necesita y explora un mundo lleno de misterio.',
-        rating: 'Mayo 2023'
+        rating:4.5,          // Rating numérico
+        release: 'Mayo 2023'  // Fecha de lanzamiento
     },
     {
         bgImage: './images/fnflogo.png',
         character: './images/BfPng2k.png',
         title: 'Friday Night Funkin',
         paragraph: 'Siente la música, vence a tus rivales y conquista el escenario.',
-        rating: 'Noviembre 2020'
+        rating: 5,
+        release: 'Noviembre 2020'
     },
     {
         bgImage: './images/sonicLogo.png',
         character: './images/sonic.png',
         title: 'SONIC THE HEDGEHOG 2',
         paragraph: 'Corre a toda velocidad y detén a Dr. Robotnik.',
-        rating: 'Marzo 2022'
+        rating: 4,
+        release: 'Marzo 2022'
     }
 ];
+
 
 // Obtener elementos
 const heroBg = document.querySelector('.hero-bg-image');
 const heroChar = document.querySelector('.hero-character');
 const heroTitle = document.querySelector('.TituloHero');
 const heroParagraph = document.querySelector('.parrafoHero');
-const heroRating = document.querySelector('.rating-text:last-of-type');
-
-let currentSlide = 0;
+const heroStars = document.querySelector('.stars');
+const heroDate = document.querySelector('.date-text');
+const heroBtn = document.querySelector('.btn2'); // botón VER JUEGO
 
 function fadeChange(slide) {
-    // Aplicar fade out
-    heroBg.classList.add('fade-out');
-    heroChar.classList.add('fade-out');
-    heroTitle.classList.add('fade-out');
-    heroParagraph.classList.add('fade-out');
-    heroRating.classList.add('fade-out');
+    // Fade out simultáneo de todo
+    [heroBg, heroChar, heroTitle, heroParagraph, heroStars, heroDate, heroBtn].forEach(el => el.style.opacity = 0);
 
-    // Después de la transición
     setTimeout(() => {
+        // Cambiar contenido
         heroBg.src = slide.bgImage;
         heroChar.src = slide.character;
         heroTitle.textContent = slide.title;
         heroParagraph.textContent = slide.paragraph;
-        heroRating.textContent = slide.rating;
+        heroDate.textContent = `Lanzamiento: ${slide.release}`;
 
-        // Fade in
-        heroBg.classList.remove('fade-out');
-        heroChar.classList.remove('fade-out');
-        heroTitle.classList.remove('fade-out');
-        heroParagraph.classList.remove('fade-out');
-        heroRating.classList.remove('fade-out');
-    }, 1000); // coincide con la duración de transición en CSS
+        // Renderizar rating
+        let ratingHTML = 'Rating: ';
+        const fullStars = Math.floor(slide.rating);
+        const halfStar = slide.rating % 1 >= 0.5;
+        for (let i = 0; i < fullStars; i++) ratingHTML += '<i class="fa-solid fa-star"></i>';
+        if (halfStar) ratingHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+        for (let i = fullStars + (halfStar ? 1 : 0); i < 5; i++) ratingHTML += '<i class="fa-regular fa-star"></i>';
+        heroStars.innerHTML = ratingHTML;
+
+        // Fade in de todo al mismo tiempo
+        [heroBg, heroChar, heroTitle, heroParagraph, heroStars, heroDate, heroBtn].forEach(el => {
+            if (el === heroBg) el.style.opacity = 0.15; // fondo semi-transparente
+            else el.style.opacity = 1;
+        });
+
+    }, 1000); // Duración del fade out
+
+    // Animación del personaje
+    heroChar.classList.add('animate');
+    setTimeout(() => heroChar.classList.remove('animate'), 1000);
 }
+
+// Cambio automático de slides
+let currentSlide = 0;
+renderSlide(heroSlides[currentSlide]);
 
 function changeHero() {
     currentSlide = (currentSlide + 1) % heroSlides.length;
     fadeChange(heroSlides[currentSlide]);
 }
 
-// Cambiar cada 8 segundos
+// Cambiar cada 5 segundos
 setInterval(changeHero, 5000);
 
 /* Esto es el swipe de las cartas de suscripciones */

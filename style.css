@@ -89,6 +89,8 @@ header .logo {
     top: 50%; 
     transform: translateY(-50%) translateX(100px); 
     opacity: 0.15; pointer-events: none; 
+    transition: opacity 1s ease-in-out;
+
 }
 
 .hero-logo-bg { 
@@ -121,6 +123,8 @@ header .logo {
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   flex-direction: column;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
 }
 
 .TituloHero{
@@ -137,8 +141,10 @@ header .logo {
 .rating-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0px;
     margin: 10px 0px;
+    font-size: 30px;
+
 }
 
 .rating-text {
@@ -146,9 +152,33 @@ header .logo {
     font-size: 30px;
 }
 
+.stars {
+    display: flex;
+    gap: 4px;
+    font-size: 30px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 1;
+}
+
 .stars i {
     color: #fff; /* estrellas blancas */
-    font-size: 18px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+/* Fecha de lanzamiento */
+.release-date {
+    font-size: 20px;
+    margin: 6px 0;
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.date-text{
+    display: flex;
+    gap: 4px;
+    font-size: 30px;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 1; 
 }
 
  /* personaje */
@@ -161,6 +191,8 @@ header .logo {
     right: 80px;
     bottom: 0;
     transform: translateX(250px) translateY(150px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
 }
 
 .splash-1 {
@@ -179,6 +211,26 @@ header .logo {
 .splash-1 { z-index: 2; }
 .splash-2 { z-index: 3; }
 
+/* Animaciónes de desvanecimiento */
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-character.animate {
+    transform: translateY(220px) scale(1.02);
+}
+
+.TituloHero,
+.parrafoHero,
+.rating-text:last-of-type {
+    transition: opacity 1s ease; /* Para que fade-out funcione */
+}
 
 
 /* boton no tan redondo*/
