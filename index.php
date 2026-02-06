@@ -429,7 +429,7 @@ const heroSlides = [
         bgImage: './images/HaloLogo.png',
         character: './images/HaloPng.png',
         title: 'Halo',
-        paragraph: 'Conviértete en el Spartan que cambiará el destino de la galaxia.',
+        paragraph: 'Los Spartans nunca mueren, solo se elevan en la gloria del combate. Sé uno de ellos',
         rating: 4,
         release: 'Junio 2001 '
     }
@@ -464,7 +464,7 @@ function fadeChange(slide) {
 
         // Ajuste especial para Halo
         if(slide.title === "Halo") {
-            heroChar.style.width = "600px";
+            heroChar.style.width = "625px";
             heroChar.style.right = "100px";
             heroChar.style.bottom = "0px";
             heroChar.style.transform = "translateX(0) translateY(0)";
