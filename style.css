@@ -894,5 +894,133 @@ footer {
   padding: 40px;
 }
 
+.cart-link {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Estilo del Badge flotante */
+.cart-count-badge {
+  position: absolute;
+  /* Lo posicionamos en la esquina superior derecha del cuadro de 48px */
+  top: -2px;
+  right: -2px;
+  
+  background-color: #ff0055; /* Color llamativo */
+  color: white;
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  
+  /* Crear un círculo perfecto */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  
+  /* Centrar el número dentro del círculo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Sombra para que resalte sobre el fondo oscuro de la sidebar */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  
+  /* Asegurar que el badge esté encima de todo */
+  z-index: 10;
+  pointer-events: none; /* No interfiere con el click */
+  
+  transition: all 0.3s ease;
+}
+
+/* Efecto hover: el badge también reacciona cuando pasas el mouse por el icono */
+.cart-link:hover .cart-count-badge {
+  transform: scale(1.1);
+  background-color: #ffffff;
+  color: #d60d7b;
+}
+
+/* --------- SECCIÓN SUSCRIPCIONES --------- */
+/* --------- SUSCRIPCIONES BARAJA --------- */
+.subscriptions {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.sub-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px; /* Espacio para el desplazamiento lateral de las cartas */
+    margin-top: 40px;
+}
+
+.card-stack {
+    position: relative;
+    width: 300px;
+    height: 420px;
+    cursor: pointer;
+}
+
+.sub-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #0a0a0a;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s;
+    box-sizing: border-box;
+}
+
+/* Posicionamiento inicial de la baraja */
+.sub-card:nth-child(2) { z-index: 2; transform: translate(0, 0); }
+.sub-card:nth-child(1) { z-index: 1; transform: translate(15px, -15px); opacity: 0.6; }
+
+/* Colores Neón por Marca */
+.xbox { border-color: #107c10; box-shadow: 0 0 15px rgba(16, 124, 16, 0.3); }
+.xbox .btn-sub { background: #107c10; }
+
+.playstation { border-color: #003791; box-shadow: 0 0 15px rgba(0, 55, 145, 0.3); }
+.playstation .btn-sub { background: #003791; }
+
+.nintendo { border-color: #e60012; box-shadow: 0 0 15px rgba(230, 0, 18, 0.3); }
+.nintendo .btn-sub { background: #e60012; }
+
+/* Detalles internos */
+.sub-card h3 { font-size: 1.1rem; margin: 15px 0; color: #fff; height: 40px; }
+.sub-card .price { font-size: 2rem; color: #ffcc00; margin-bottom: 20px; }
+.sub-card .price span { font-size: 0.8rem; color: #aaa; }
+.sub-card .features { list-style: none; padding: 0; text-align: left; font-size: 0.85rem; flex-grow: 1; width: 100%; }
+.sub-card .features li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.badge { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 10px; font-size: 0.7rem; }
+
+.btn-sub {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.btn-sub:hover { transform: scale(1.1); }
+
+/* Animación de cambio de tarjeta */
+.moving-back {
+    animation: slideAndBack 0.6s ease-in-out forwards;
+}
+
+@keyframes slideAndBack {
+    0% { transform: translate(0, 0); z-index: 5; }
+    50% { transform: translate(-130%, 20px) rotate(-10deg); z-index: 5; }
+    100% { transform: translate(15px, -15px); z-index: 1; }
+}
 
 /* --- Fin Carrito Styles --- */
