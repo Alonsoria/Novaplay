@@ -812,7 +812,11 @@ footer {
     box-shadow: 0 0 20px #d60d7b, 0 0 40px #7c0ba1;
 }
 
+/* --- barra lateral --- */
 .sidebar {
+  background: #15152D;
+  opacity: 0.5;
+  border-radius: 12px;
   position: fixed;
   top: 50%;
   left: 20px;                /* izquierda */
@@ -823,6 +827,69 @@ footer {
   gap: 18px;
 
   z-index: 999;
+}
+
+.sidebar-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.sidebar-icon:hover {
+  background: linear-gradient(135deg, #d60d7b, #8a0589);
+  transform: scale(1.1);
+  opacity: 100%;
+}
+
+/* Botón del icono */
+.icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+
+  transition: all 0.3s ease;
+}
+
+/* SVG */
+.icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* Hover */
+.icon:hover {
+  background: linear-gradient(135deg, #d60d7b, #8a0589);
+  transform: scale(1.1);
+}
+
+.icon:hover svg {
+  transform: scale(1.2);
+}
+
+/* Contenido */
+.content {
+  margin-left: 120px;
+  padding: 40px;
 }
 
 
