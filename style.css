@@ -748,7 +748,7 @@ footer {
     margin-right: 10px;
     /* gap: 18px; */
     box-shadow: 0 2px 8px #7c0ba144;
-    filter: drop-shadow(0 0 50px #d60d7b);
+    filter: drop-shadow(0 0 55px #d60d7b);
     border: 1px solid #ffffff; 
 }
 
@@ -985,8 +985,10 @@ footer {
   overflow: visible !important;
 }
 
+/* Estilo del Badge flotante */
 .cart-count-badge {
   position: absolute;
+  /* Lo posicionamos en la esquina superior derecha del cuadro de 48px */
   top: -2px;
   right: -2px;
   
@@ -995,15 +997,24 @@ footer {
   font-family: 'Arial', sans-serif;
   font-size: 11px;
   font-weight: bold;
+  
+  /* Crear un círculo perfecto */
   width: 18px;
   height: 18px;
   border-radius: 50%;
-    display: flex;
+  
+  /* Centrar el número dentro del círculo */
+  display: flex;
   align-items: center;
   justify-content: center;
+  
+  /* Sombra para que resalte sobre el fondo oscuro de la sidebar */
   box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  
+  /* Asegurar que el badge esté encima de todo */
   z-index: 10;
   pointer-events: none; /* No interfiere con el click */
+  
   transition: all 0.3s ease;
 }
 
@@ -1026,7 +1037,7 @@ footer {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 60px; 
+    gap: 60px; /* Espacio para el desplazamiento lateral de las cartas */
     margin-top: 40px;
 }
 
@@ -1054,6 +1065,7 @@ footer {
     box-sizing: border-box;
 }
 
+/* Posicionamiento inicial de la baraja */
 .sub-card:nth-child(2) { 
     z-index: 2; 
     transform: translate(0, 0); 
@@ -1094,6 +1106,7 @@ footer {
     background: #e60012; 
 }
 
+/* Detalles internos */
 .sub-card h3 { 
     font-size: 1.1rem; 
     margin: 15px 0; 
