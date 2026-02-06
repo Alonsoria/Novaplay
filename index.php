@@ -201,13 +201,26 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         
         <div class="card-stack" id="stack-xbox">
             <div class="sub-card xbox">
-                <span class="badge">Nivel 2</span>
-                <h3>XBOX GAME PASS CORE</h3>
+                <span class="badge">Nivel 3</span>
+                <h3>XBOX GAME PASS ULTIMATE</h3>
                 <div class="price">$169 <span>MXN/mes</span></div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-circle-check"></i> Multijugador online</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Catálogo de 25 juegos</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Ofertas para miembros</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Más de 400 juegos </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Nuevos juegos desde el mismo día de su lanzamiento </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Incluye Club de Fortnite, EA Play y Ubisoft+ Classics</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Streaming de juegos con nuestra mejor calidad con los tiempos de espera más cortos</li>
+                </ul>
+                <a href="index.php?add=ID_CORE" class="btn-sub">Agregar al Carrito</a>
+            </div>
+            <div class="sub-card xbox">
+                <span class="badge">Nivel 2</span>
+                <h3>XBOX GAME PASS PREMIUM</h3>
+                <div class="price">$169 <span>MXN/mes</span></div>
+                <ul class="features">
+                    <li><i class="fa-solid fa-circle-check"></i> Todos los beneficios de XBOX GAME PASS ESSENTIAL</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Más de 200 juegos</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Nuevos juegos publicados por Xbox en 12 meses desde su lanzamiento</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Streaming de juegos con tiempos de espera más cortos</li>
                 </ul>
                 <a href="index.php?add=ID_CORE" class="btn-sub">Agregar al Carrito</a>
             </div>
@@ -216,9 +229,9 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                 <h3>XBOX GAME PASS ESSENTIAL</h3>
                 <div class="price">$169 <span>MXN/mes</span></div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-circle-check"></i> Acceso a +400 juegos</li>
-                    <li><i class="fa-solid fa-circle-check"></i> EA Play incluido</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Juegos de día uno</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Más de 50 juegos en la consola Xbox, PC y dispositivos compatibles</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Multijugador en línea para consola</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Beneficios para juegos</li>
                     <li><i class="fa-solid fa-circle-check"></i> Cloud Gaming</li>
                 </ul>
                 <a href="index.php?add=ID_ULTIMATE" class="btn-sub">Agregar al Carrito</a>
@@ -264,23 +277,26 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         <div class="card-stack" id="stack-nintendo">
             <div class="sub-card nintendo">
                 <span class="badge">Nivel 2</span>
-                <h3>NINTENDO SWITCH ONLINE</h3>
-                <div class="price">$99 <span>MXN/mes</span></div>
+                <h3>PLAN FAMILIAR</h3>
+                <div class="price">$149.92 <span>MXN/mes</span></div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-circle-check"></i> Online Play</li>
-                    <li><i class="fa-solid fa-circle-check"></i> NES & SNES</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Nube de datos</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 8 Cuentas con suscripción</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Todos los beneficios del plan individual </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Clasicos de N64, Gamecube, Gameboy, Sega GENESIS</li>
                 </ul>
                 <a href="index.php?add=ID_NS_BASIC" class="btn-sub">Agregar al Carrito</a>
             </div>
             <div class="sub-card nintendo">
                 <span class="badge">Nivel 1</span>
-                <h3>NSO + EXPANSION PACK</h3>
-                <div class="price">$230 <span>MXN/mes</span></div>
+                <h3>PLAN INDIVIDUAL </h3>
+                <div class="price">$90 <span>MXN/mes</span></div>
                 <ul class="features">
-                    <li><i class="fa-solid fa-circle-check"></i> Nintendo 64 & Sega</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Mario Kart 8 DLC</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Animal Crossing DLC</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Juego en linea </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Super Nintendo Entertainment System™ - Nintendo Classics </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Nintendo Entertainment System™ - Nintendo Classics </li>
+                    <li><i class="fa-solid fa-circle-check"></i> Game Boy™ - Nintendo Classics </li>
+
+
                 </ul>
                 <a href="index.php?add=ID_NS_EXP" class="btn-sub">Agregar al Carrito</a>
             </div>

@@ -980,26 +980,81 @@ footer {
 }
 
 /* Posicionamiento inicial de la baraja */
-.sub-card:nth-child(2) { z-index: 2; transform: translate(0, 0); }
-.sub-card:nth-child(1) { z-index: 1; transform: translate(15px, -15px); opacity: 0.6; }
+.sub-card:nth-child(2) { 
+    z-index: 2; 
+    transform: translate(0, 0); 
+}
+.sub-card:nth-child(1) { 
+    z-index: 1; 
+    transform: translate(15px, -15px); opacity: 0.6; 
+}
 
 /* Colores Neón por Marca */
-.xbox { border-color: #107c10; box-shadow: 0 0 15px rgba(16, 124, 16, 0.3); }
-.xbox .btn-sub { background: #107c10; }
+.xbox { 
+    border-color: #107c10; 
+    box-shadow: 0 0 15px rgba(16, 124, 16, 0.3);
+    background: linear-gradient(90deg, #107B10, #0E6B0E);
 
-.playstation { border-color: #003791; box-shadow: 0 0 15px rgba(0, 55, 145, 0.3); }
-.playstation .btn-sub { background: #003791; }
+}
+.xbox .btn-sub { 
+    background: #107c10;
+}
 
-.nintendo { border-color: #e60012; box-shadow: 0 0 15px rgba(230, 0, 18, 0.3); }
-.nintendo .btn-sub { background: #e60012; }
+.playstation { 
+    border-color: #003791; 
+    box-shadow: 0 0 15px rgba(0, 55, 145, 0.3); 
+    background: linear-gradient(90deg, #003EAC, #00225E);
+
+}
+.playstation .btn-sub { 
+    background: #003791; 
+}
+
+.nintendo { 
+    border-color: #e60012;
+    box-shadow: 0 0 15px rgba(230, 0, 18, 0.3); 
+    background: linear-gradient(90deg, #E70011, #9E000D);
+
+}
+.nintendo .btn-sub { 
+    background: #e60012; 
+}
 
 /* Detalles internos */
-.sub-card h3 { font-size: 1.1rem; margin: 15px 0; color: #fff; height: 40px; }
-.sub-card .price { font-size: 2rem; color: #ffcc00; margin-bottom: 20px; }
-.sub-card .price span { font-size: 0.8rem; color: #aaa; }
-.sub-card .features { list-style: none; padding: 0; text-align: left; font-size: 0.85rem; flex-grow: 1; width: 100%; }
-.sub-card .features li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-.badge { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 10px; font-size: 0.7rem; }
+.sub-card h3 { 
+    font-size: 1.1rem; 
+    margin: 15px 0; 
+    color: #fff; height: 40px; 
+}
+.sub-card .price { 
+    font-size: 2rem; 
+    color: #ffcc00; 
+    margin-bottom: 20px; 
+}
+.sub-card .price span { 
+    font-size: 0.8rem; 
+    color: #aaa; 
+}
+.sub-card .features { 
+    list-style: none; 
+    padding: 0; 
+    text-align: left; 
+    font-size: 0.85rem; 
+    flex-grow: 1; 
+    width: 100%; 
+}
+.sub-card .features li { 
+    margin-bottom: 8px;
+     display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+.badge { 
+    background: rgba(255,255,255,0.1); 
+    padding: 4px 10px; 
+    border-radius: 10px; 
+    font-size: 0.7rem; 
+}
 
 .btn-sub {
     text-decoration: none;
