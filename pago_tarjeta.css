@@ -1,0 +1,269 @@
+
+    :root {
+      --bg-dark: #0a0610;
+      --card-bg: #120a1d;
+      --neon-pink: #ff2dbf;
+      --neon-purple: #9b2cff;
+      --input-bg: rgba(255,255,255,0.1);
+      --input-border: rgba(255,255,255,0.25);
+      --text-light: #ffffff;
+      --text-muted: #c8b8d9;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #2b0a3d 0%, #0a0610 45%, #050308 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      overflow: hidden;
+    }
+
+    .payment-wrapper {
+      position: relative;
+      width: 360px;
+      max-width: 90vw;
+      padding: 3px; /* for glow border */
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+      animation: pulseGlow 3s ease-in-out infinite;
+      box-shadow:
+        0 0 25px rgba(255, 45, 191, 0.5),
+        0 0 60px rgba(155, 44, 255, 0.35);
+    }
+
+    .payment-card {
+      background: linear-gradient(180deg, #14091f 0%, #0b0612 100%);
+      border-radius: 25px;
+      padding: 32px 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .payment-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,45,191,0.15), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(155,44,255,0.12), transparent 60%);
+      pointer-events: none;
+    }
+
+    .icon-circle {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(255,45,191,0.6);
+      animation: floatIcon 4s ease-in-out infinite;
+    }
+
+    .icon-circle svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 6px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: rgba(255,255,255,0.6);
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 12px 12px 42px;
+      border-radius: 12px;
+      border: 1px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text-light);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.45);
+    }
+
+    input:focus {
+      border-color: var(--neon-pink);
+      box-shadow:
+        0 0 0 1px rgba(255,45,191,0.5),
+        0 0 12px rgba(255,45,191,0.4);
+      transform: scale(1.01);
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row .input-group {
+      flex: 1;
+    }
+
+    .pay-button {
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow:
+        0 0 18px rgba(255,45,191,0.5),
+        0 0 30px rgba(155,44,255,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: pulseButton 2.8s ease-in-out infinite;
+    }
+
+    .pay-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 0 25px rgba(255,45,191,0.7),
+        0 0 45px rgba(155,44,255,0.5);
+    }
+
+    .pay-button:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .pay-button svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .index-button {
+      margin-top: 20px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow:
+        0 0 18px rgba(255,45,191,0.5),
+        0 0 30px rgba(155,44,255,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .index-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow:
+        0 0 25px rgba(255,45,191,0.7),
+        0 0 45px rgba(155,44,255,0.5);
+    }
+    .index-button:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 14px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7CFFB2;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    /* Animations */
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 25px rgba(255, 45, 191, 0.45),
+          0 0 60px rgba(155, 44, 255, 0.3);
+      }
+      50% {
+        box-shadow:
+          0 0 35px rgba(255, 45, 191, 0.65),
+          0 0 75px rgba(155, 44, 255, 0.5);
+      }
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulseButton {
+      0%, 100% { box-shadow: 0 0 18px rgba(255,45,191,0.45), 0 0 30px rgba(155,44,255,0.3); }
+      50% { box-shadow: 0 0 26px rgba(255,45,191,0.7), 0 0 45px rgba(155,44,255,0.55); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Small screens */
+    @media (max-width: 420px) {
+      .payment-card {
+        padding: 28px 20px 24px;
+      }
+    }
