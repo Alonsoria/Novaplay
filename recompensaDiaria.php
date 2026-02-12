@@ -1,7 +1,5 @@
 <?php
 session_start();
-require_once 'config.php'; // conexión a la BD
-$usuarioId = $_SESSION['id_usuario'] ?? null;
 
 /* =======================
    INICIALIZAR SESIONES
@@ -62,27 +60,19 @@ if (isset($_POST['reclamar'])) {
         }
     }
 
-if ($mensaje === '') {
-    $recompensa['puntos'] += 3;
-    $recompensa['ultimo_dia'] = $hoy;
-    $animar = true;
+    if ($mensaje === '') {
+        $recompensa['puntos'] += 3;
+        $recompensa['ultimo_dia'] = $hoy;
+        $animar = true;
 
-    if ($recompensa['racha'] < 7) {
-        $recompensa['racha']++;
-    } else {
-        $recompensa['racha'] = 1;
+        if ($recompensa['racha'] < 7) {
+            $recompensa['racha']++;
+        } else {
+            $recompensa['racha'] = 1;
+        }
+
+        $mensaje = "+3 puntos obtenidos!";
     }
-
-    if ($usuarioId) {
-        $stmt = $conn->prepare("UPDATE usuarios SET puntos = puntos + 3 WHERE id_usuario = ?");
-        $stmt->bind_param("i", $usuarioId);
-        $stmt->execute();
-        $stmt->close();
-    }
-
-    $mensaje = "+3 puntos obtenidos!";
-}
-
 }
 
 /* =======================
@@ -123,61 +113,226 @@ $esDiaFinal = ($diaMostrado == 7);
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Novaplay</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="./style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="icon" href="./images/novaplay icono.png">
+<title>Recompensa Diaria</title>
+<link rel="stylesheet" href="RecompensaDiaria.css">
+
+<style>
+/* ===== RECOMPENSA ===== */
+.recompensa-container {
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 14px;
+    margin: 30px 0;
+}
+
+.dia {
+    background: #1a1a2e;
+    border: 2px solid #7c0ba1;
+    border-radius: 14px;
+    padding: 20px 10px;
+    box-shadow: 0 0 12px rgba(124,11,161,.4);
+}
+
+.dia.activo {
+    border-color: #ffcc00;
+    box-shadow: 0 0 25px #ffcc00;
+    transform: scale(1.05);
+}
+
+.dia.completado {
+    opacity: .4;
+}
+
+.puntos {
+    font-size: 26px;
+    margin-top: 10px;
+    color: #ffcc00;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    --neon: <?= $colorModal ?>;
+
+    position: relative;
+    background: #1a1a2e;
+    border-radius: 20px;
+    padding: 40px;
+    width: 420px;
+    max-width: 90%;
+    text-align: center;
+
+    animation: modalIn .7s ease-out;
+
+    box-shadow:
+        0 0 25px var(--neon),
+        inset 0 0 15px rgba(0,0,0,.6);
+}
+
+@keyframes neonRun {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes modalIn {
+    from {
+        transform: scale(.7) translateY(60px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.modal-images {
+    position: relative;
+    height: 220px;          /* un poco más de espacio */
+    display: flex;
+    justify-content: center;
+    align-items: center;    /* 🔥 centra vertical y horizontal */
+}
+
+.img-dia {
+    width: 140px;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px var(--neon));
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes float {
+    50% { transform: translateY(-18px); }
+}
+
+.aura-bg {
+    position: absolute;
+    width: 220px;
+    opacity: .6;
+    animation: auraSpin 10s linear infinite;
+    filter: drop-shadow(0 0 30px var(--neon));
+    z-index: 1;
+}
+
+@keyframes auraSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.modal-images {
+    position: relative;
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    margin: 25px;
+}
+
+/* ===== CAPA DE FONDO ===== */
+.bg-layer {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+    z-index: 1;
+    opacity: 0.9;
+    animation: bgPulse 4s ease-in-out infinite;
+}
+
+/* ===== CAPA ESMERALDA ===== */
+.img-dia {
+    position: relative;
+    width: 140px;
+    margin-top:25px;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px var(--neon));
+}
+
+/* ANIMACIONES */
+@keyframes float {
+    50% { transform: translateY(-14px); }
+}
+
+@keyframes bgPulse {
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+/* ===== MODAL PASO 1 Y 2 ===== */
+.modal-step { 
+    display: none; 
+animation: fadeIn .6s ease forwards; }
+.modal-step-1 { 
+    display: block; }
+.final-animation img { 
+    width: 260px; 
+    max-width: 100%; 
+    margin: 20px auto; 
+    display: block; 
+    animation: pulse 2.5s infinite; 
+}
+@keyframes fadeIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulse { 50% { transform: scale(1.08); } }
+
+.modal-close { position: absolute; top: 12px; right: 14px; background: none; border: none; font-size: 22px; color: #fff; cursor: pointer; }
+
+</style>
 </head>
+<body>
+
 <header>
-    <div class="header-container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="productos.php">Productos</a></li>
-                <li><a href="combos.php">Combos</a></li>
-                <li><a href="about_us.php">Acerca de nosotros</a></li>
-
-                <!-- LOGO -->
-                <li class="logo-item">
-                    <a href="index.php">
-                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-                    </a>
-                </li>
-
-                <!-- MENU DE PLATAFORMAS -->
-                <li class="platforms-wrapper">
-                    <button id="platformToggle" class="platform-toggle" aria-expanded="false">
-                        Plataformas ▼
-                    </button>
-                    <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
-                        <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
-                        <ul>
-                            <?php foreach($platformsArr as $plat): ?>
-                                <li>
-                                    <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
-                                        <?php echo htmlspecialchars($plat['nombre']); ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="carrito.php">
-                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
-                    </a>
-                </li>
-
-                <!-- LOGIN -->
-                <li class="login-item">
-                    <a href="login.php" class="login-btn">Login</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<div class="header-container">
+    <nav class="navbar">
+        <ul>
+            <li><a href="productos.php">Productos</a></li>
+            <li><a href="combos.php">Combos</a></li>
+            <li><a href="about_us.php">Acerca de nosotros</a></li>
+            <li class="logo-item"><a href="index.php"><img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo"></a></li>
+            <li class="platforms-wrapper">
+                <button id="platformToggle" class="platform-toggle" aria-expanded="false">Plataformas ▾</button>
+                <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
+                    <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
+                    <ul>
+                        <?php foreach($platformsArr as $plat): ?>
+                        <li><a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>"><img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"><?php echo htmlspecialchars($plat['nombre']); ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="carrito.php">Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+            <li class="login-item"><a href="login.php" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+</div>
 </header>
 
 <main class="recompensa-container">
@@ -283,7 +438,7 @@ function closeModal(){ modal.classList.add("modal-out"); setTimeout(()=>modal.re
 </script>
 <?php endif; ?>
 
-</footer class="footer">
+<footer class="footer">
     <div class="footer-container">
         <p>&copy; <?php echo date("Y"); ?> Novaplay - E-commerce de Videojuegos</p>
         <div class="footer-links">
