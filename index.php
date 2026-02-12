@@ -532,6 +532,40 @@ document.querySelectorAll('.card-stack').forEach(stack => {
 });
 </script>
 </script>
+
+<script>
+// Este script es para la animacion "splash" de los icons
+document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.sidebar a, .sidebar .icon').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Opcional: Si quieres que el splash salga exacto de donde diste clic:
+            // const rect = this.getBoundingClientRect();
+            
+            this.classList.add('splash-effect');
+
+            for (let i = 0; i < 8; i++) { // Aumenté a 8 gotas para que se vea más "pro"
+                const drop = document.createElement('span');
+                drop.classList.add('splash-drop');
+
+                // Direcciones aleatorias más amplias (hasta 150px)
+                const x = (Math.random() - 0.5) * 200 + 'px';
+                const y = (Math.random() - 0.5) * 200 + 'px';
+
+                drop.style.setProperty('--x', x);
+                drop.style.setProperty('--y', y);
+
+                this.appendChild(drop);
+
+                setTimeout(() => {
+                    drop.remove();
+                }, 600);
+            }
+        });
+    });
+});
+
+</script>
+
 </body>
 
 <aside class="sidebar">

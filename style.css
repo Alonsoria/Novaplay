@@ -946,6 +946,43 @@ footer {
   transform: scale(1.1);
 }
 
+/* Efecto de splash al seleccionar un icono */
+/* Splash dinámico (gotas) */
+.sidebar a, .sidebar-icon, .icon {
+    position: relative; 
+    overflow: visible !important; /* CRUCIAL: Permite que las gotas salgan del recuadro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* La gotita individual */
+.splash-drop {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #d60d7b; /* El color rosa neón de tu logo */
+    border-radius: 50%;
+    pointer-events: none; /* No interfiere con el clic */
+    z-index: 999;
+    filter: drop-shadow(0 0 5px #d60d7b);
+    animation: splash-out 0.6s ease-out forwards;
+}
+
+/* Animación que usa las variables de JS */
+@keyframes splash-out {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        /* Se mueve hacia la posición aleatoria calculada en JS */
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0);
+        opacity: 0;
+    }
+}
 /* ---------- SIDEBAR AUTO HIDE ---------- */
 .sidebar {
     position: fixed;
