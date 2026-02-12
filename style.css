@@ -943,6 +943,52 @@ footer {
   transform: scale(1.1);
 }
 
+/* ---------- SIDEBAR AUTO HIDE ---------- */
+.sidebar {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translate(-85%, -50%); /* casi oculta */
+    width: 70px;
+    background: linear-gradient(180deg, #250643, #7c0ba1); /* Podemos cambiar esto si preferimos que se vea opaca y oscura */
+    border-radius: 0 18px 18px 0;
+    padding: 14px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 999;
+    transition: transform 0.35s ease;
+    box-shadow: 0 0 18px rgba(0,0,0,0.5);
+}
+
+/* Zona invisible para detectar el hover */
+.sidebar::before {
+    content: "";
+    position: absolute;
+    left: -25px;
+    top: 0;
+    width: 25px;
+    height: 100%;
+}
+
+/* Mostrar sidebar */
+.sidebar:hover {
+    transform: translate(0, -50%);
+}
+
+/* Iconos */
+.sidebar a {
+    color: white;
+    font-size: 22px;
+    text-align: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.sidebar a:hover {
+    transform: scale(1.15);
+    color: #ff6ac1;
+}
+
 /* Botón del icono */
 .icon {
   width: 48px;
