@@ -42,7 +42,7 @@ if (isset($_POST['pasar_dia'])) {
         );
     }
 
-    $mensaje = "🧪 Día avanzado manualmente (modo prueba)";
+    $mensaje = "Día avanzado manualmente (modo prueba)";
 }
 
 /* =======================
@@ -56,7 +56,7 @@ if (isset($_POST['reclamar'])) {
         if ($diff > 1) {
             $recompensa['racha'] = 1;
         } elseif ($diff == 0) {
-            $mensaje = "⏳ Ya reclamaste hoy";
+            $mensaje = "Ya reclamaste hoy, espera al dia siguiente para reclamar más recompensas!";
         }
     }
 
@@ -71,7 +71,7 @@ if (isset($_POST['reclamar'])) {
             $recompensa['racha'] = 1;
         }
 
-        $mensaje = "🎉 ¡+3 puntos obtenidos!";
+        $mensaje = "+3 puntos obtenidos!";
     }
 }
 
@@ -85,7 +85,7 @@ $imagenesRecompensa = [
     4 => 'images/RecompensaDiaria/EsmeraldaRoja.png',
     5 => 'images/RecompensaDiaria/EsmeraldaCyan.png',
     6 => 'images/RecompensaDiaria/EsmeraldaRosa.png',
-    7 => 'images/RecompensaDiaria/esmeraldadAzul.png',
+    7 => 'images/RecompensaDiaria/esmeraldaAzul.png',
 ];
 
 $diaMostrado = $recompensa['racha'] - 1;
@@ -287,150 +287,156 @@ $esDiaFinal = ($diaMostrado == 7);
     }
 }
 
+/* ===== MODAL PASO 1 Y 2 ===== */
+.modal-step { 
+    display: none; 
+animation: fadeIn .6s ease forwards; }
+.modal-step-1 { 
+    display: block; }
+.final-animation img { 
+    width: 260px; 
+    max-width: 100%; 
+    margin: 20px auto; 
+    display: block; 
+    animation: pulse 2.5s infinite; 
+}
+@keyframes fadeIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulse { 50% { transform: scale(1.08); } }
+
+.modal-close { position: absolute; top: 12px; right: 14px; background: none; border: none; font-size: 22px; color: #fff; cursor: pointer; }
 
 </style>
 </head>
 <body>
 
 <header>
-    <div class="header-container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="productos.php">Productos</a></li>
-                <li><a href="combos.php">Combos</a></li>
-                <li><a href="about_us.php">Acerca de nosotros</a></li>
-
-                <!-- LOGO -->
-                <li class="logo-item">
-                    <a href="index.php">
-                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-                    </a>
-                </li>
-
-                <!-- MENU DE PLATAFORMAS -->
-                <li class="platforms-wrapper">
-                    <button id="platformToggle" class="platform-toggle" aria-expanded="false">
-                        Plataformas ▾
-                    </button>
-                    <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
-                        <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
-                        <ul>
-                            <?php foreach($platformsArr as $plat): ?>
-                                <li>
-                                    <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
-                                        <?php echo htmlspecialchars($plat['nombre']); ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="carrito.php">
-                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
-                    </a>
-                </li>
-
-                <!-- LOGIN -->
-                <li class="login-item">
-                    <a href="login.php" class="login-btn">Login</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<div class="header-container">
+    <nav class="navbar">
+        <ul>
+            <li><a href="productos.php">Productos</a></li>
+            <li><a href="combos.php">Combos</a></li>
+            <li><a href="about_us.php">Acerca de nosotros</a></li>
+            <li class="logo-item"><a href="index.php"><img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo"></a></li>
+            <li class="platforms-wrapper">
+                <button id="platformToggle" class="platform-toggle" aria-expanded="false">Plataformas ▾</button>
+                <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
+                    <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
+                    <ul>
+                        <?php foreach($platformsArr as $plat): ?>
+                        <li><a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>"><img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"><?php echo htmlspecialchars($plat['nombre']); ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="carrito.php">Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+            <li class="login-item"><a href="login.php" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+</div>
 </header>
 
-
-<!-- ===== HEADER ORIGINAL ===== -->
-<?php /* TU HEADER ORIGINAL AQUÍ (SIN CAMBIOS) */ ?>
-
 <main class="recompensa-container">
-    <h2>Recompensa Diaria</h2>
 
-    <div class="puntos">
-        ⭐ Puntos: <?= $recompensa['puntos'] ?>
-    </div>
+<h2>Recompensa Diaria</h2>
 
-    <div class="calendario">
-        <?php for ($i=1;$i<=7;$i++): ?>
-        <div class="dia <?= $i < $recompensa['racha'] ? 'completado':'' ?> <?= $i==$recompensa['racha']?'activo':'' ?>">
-            Día <?= $i ?><br>+3 pts
-        </div>
-        <?php endfor; ?>
-    </div>
+<div class="puntos">Puntos: <?= $recompensa['puntos'] ?></div>
 
-    <form method="post">
-        <button class="btn2" name="reclamar">Reclamar recompensa</button>
-    </form>
+<div class="calendario">
+    <?php for ($i=1;$i<=7;$i++): ?>
+    <div class="dia <?= $i < $recompensa['racha'] ? 'completado':'' ?> <?= $i==$recompensa['racha']?'activo':'' ?>">Día <?= $i ?><br>+3 pts</div>
+    <?php endfor; ?>
+</div>
 
-    <form method="post" style="margin-top:10px;">
-    <button class="btn2" name="pasar_dia" style="opacity:.6;font-size:14px;">
-        ⏩ Pasar día (TEST)
-    </button>
-    </form>
+<form method="post">
+    <button class="btn2" name="reclamar">Reclamar recompensa</button>
+</form>
 
-    <p><?= $mensaje ?></p>
+<form method="post" style="margin-top:10px;">
+    <button class="btn2" name="pasar_dia" style="opacity:.6;font-size:14px;">⏩ Pasar día (TEST)</button>
+</form>
+
+<p><?= $mensaje ?></p>
+
+<?php
+
+// Aqui va el personaje
+
+$personajeImg = './images/RecompensaDiaria/Main_sonic.png';
+$personajeClass = 'personaje-img';
+
+if ($diaMostrado == 7 && $recompensa['ultimo_dia'] == $hoy) {
+    $personajeImg = './images/RecompensaDiaria/ClassicSuperSonic.png';
+    $personajeClass .= ' personaje-especial'; // 🔥 agregamos clase extra
+}
+
+?>
+<div class="personaje-fondo">
+    <img src="<?= $personajeImg ?>" alt="Personaje" class="<?= $personajeClass ?>">
+</div>
+
+
+
 </main>
 
 <?php if ($animar): ?>
 <div class="modal-overlay" id="rewardModal">
     <div class="modal-content">
 
-        <h2 id="typeText"></h2>
-        <p>Día <?= $diaMostrado ?> completado</p>
-
-        <div class="modal-images">
-            <!-- CAPA FONDO -->
-            <img src="images/RecompensaDiaria/SonicAura.png" class="bg-layer">
-
-            <!-- CAPA ESMERALDA -->
-            <img src="<?= $imagenDia ?>" class="img-dia">
-
-            <!-- PARTÍCULAS (si las usas) -->
+        <!-- PASO 1 -->
+        <div class="modal-step modal-step-1">
+            <h2 id="typeText"></h2>
+            <p>Día <?= $diaMostrado ?> completado</p>
+            <div class="modal-images">
+                <img src="images/RecompensaDiaria/SonicAura.png" class="bg-layer">
+                <img src="<?= $imagenDia ?>" class="img-dia">
+            </div>
+            <button class="btn2" id="acceptReward">Continuar</button>
         </div>
 
-        <button class="btn2" id="acceptReward" onclick="closeModal()">Continuar</button>
+        <!-- PASO 2 DÍA 7 -->
+        <?php if ($esDiaFinal): ?>
+        <div class="modal-step modal-step-2">
+            <h2> FELICIDADES!</h2>
+            <div class="final-animation">
+                <img src="images/RecompensaDiaria/supersonic.gif" alt="Esmeralda Suprema">
+            </div>
+            <p>Has completado los 7 días de racha y recolectado todas las Esmeraldas del Caos!</p>
+            <button class="btn2" id="closeFinal">Cerrar</button>
+        </div>
+        <?php endif; ?>
+
     </div>
 </div>
 
 <script>
-/* TYPEWRITER */
-const text = <?= json_encode(
-    $esDiaFinal
-        ? '✨ ¡HAS DESPERTADO LA ESMERALDA SUPREMA!'
-        : 'HAZ OBTENIDO UNA ESMERALDA DEL CAOS!'
-) ?>;
+const modal = document.getElementById("rewardModal");
+const step1 = modal.querySelector(".modal-step-1");
+const step2 = modal.querySelector(".modal-step-2");
 
-let i = 0;
-const el = document.getElementById("typeText");
+document.getElementById("acceptReward").addEventListener("click", () => {
+    <?php if ($esDiaFinal): ?>
+    step1.style.display = "none";
+    step2.style.display = "block";
+    <?php else: ?>
+    closeModal();
+    <?php endif; ?>
+});
 
-(function type() {
-    if (i < text.length) {
-        el.innerHTML += text.charAt(i++);
-        setTimeout(type, 40);
-    }
-})();
-
-/* PARTÍCULAS */
-const cont = document.getElementById("particles");
-for (let i=0;i<12;i++){
-    const s=document.createElement("span");
-    s.style.top="50%";
-    s.style.left="50%";
-    s.style.animationDelay=`${i*.3}s`;
-    cont.appendChild(s);
-}
-
-function closeModal(){
-    document.getElementById("rewardModal").remove();
-}
-</script>
+<?php if ($esDiaFinal): ?>
+document.getElementById("closeFinal").addEventListener("click", closeModal);
 <?php endif; ?>
 
-<!-- ===== FOOTER ORIGINAL ===== -->
-<?php /* TU FOOTER ORIGINAL AQUÍ (SIN CAMBIOS) */ ?>
+const text = <?= json_encode(
+    $esDiaFinal ? 'Haz obtenido una Esmeralda del Caos!' : 'Haz obtenido una Esmeralda del Caos!'
+) ?>;
+
+let i=0;
+const el=document.getElementById("typeText");
+(function type() { if(i<text.length){el.innerHTML+=text.charAt(i++); setTimeout(type,40);} })();
+
+function closeModal(){ modal.classList.add("modal-out"); setTimeout(()=>modal.remove(),400); }
+</script>
+<?php endif; ?>
 
 <footer class="footer">
     <div class="footer-container">

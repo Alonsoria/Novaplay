@@ -98,3 +98,7 @@ INSERT INTO combos (nombre, descripcion, precio, imagen, activo) VALUES
 
 -Nueva funcionalidad de suscripciones 
 -Que las tarjetas tengan un id y precio unico, así cuando el usuario haga click en agregar al carrito este se guarde 
+
+12/02/2026
+
+-Por alguna razon, ahora el dropshadow se hizo mas fuerte

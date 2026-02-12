@@ -92,7 +92,7 @@ header .logo {
     align-self: flex-start;
     font-family: 'Gugi', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     opacity: 1;
-    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    transition: all 0.25s ease;
 }
 
 .btn2:hover {
@@ -174,6 +174,65 @@ h2 {
     border-color: #d60d7b;
     box-shadow: 0 0 15px #d60d7b, 0 0 30px #8a0589;
 }
+
+/* personaje */
+.personaje-left {
+    position: fixed;
+    left: 0;
+    bottom: 50px;  /* ajusta según quieras la altura */
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none; /* para que no interfiera con clicks */
+}
+
+.personaje-img {
+    width: 140px; /* ajusta al tamaño deseado */
+    max-width: 100%;
+    animation: floatPersonaje 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px #d60d7b);
+}
+
+.personaje-fondo {
+    position: fixed;
+    left: 0;
+    bottom: -100px; /* lo pones al nivel que quieras */
+    width: auto;
+    height: 80%; /* ajusta según cuánto quieres que ocupe */
+    z-index: 0; /* debajo del header/footer que tienen z-index alto */
+    pointer-events: none; /* para no bloquear clicks */
+}
+
+.personaje-fondo .personaje-img {
+    width: 300px; /* ajusta tamaño */
+    max-width: 100%;
+    animation: floatPersonaje 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px #d60d7b);
+}
+
+.personaje-especial {
+    width: 400px !important; /* tamaño especial solo para ClassicSuperSonic */
+    filter: drop-shadow(0 0 15px #fff534) !important;
+
+
+}
+
+@keyframes floatPersonaje {
+    50% { transform: translateY(-10px); }
+}
+
+/* Asegúrate que tu header y footer tengan z-index mayor */
+header, footer {
+    position: relative; /* si no lo tienen ya */
+    z-index: 10;
+}
+
+
+@keyframes floatPersonaje {
+    50% { transform: translateY(-10px); }
+}
+
 
 /* BOTÓN PRODUCTO (absolute bottom-right) */
 .btn {
