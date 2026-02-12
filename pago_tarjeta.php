@@ -1,3 +1,20 @@
+<?php
+session_start();
+include("config.php");
+
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = [];
+}
+
+$platformsArr = [];
+$platRes = $conn->query("SELECT * FROM plataformas ORDER BY nombre");
+if ($platRes) {
+    while ($r = $platRes->fetch_assoc()) $platformsArr[] = $r;
+}
+
+$cartCount = 0;
+foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,6 +64,7 @@
     </div>
 </header>
 <body>
+  <main class="page-content">
   <div class="payment-wrapper">
     <div class="payment-card">
       <div class="icon-circle">
@@ -159,6 +177,7 @@
 
     </div>
   </div>
+  </main>
 </body>
 
   <script>
