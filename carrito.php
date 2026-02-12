@@ -1,6 +1,10 @@
 <?php
+
+
 // carrito.php
 session_start();
+$usuarioId = $_SESSION['id_usuario'] ?? null;
+
 include("config.php");
 
 // Acciones (vaciar)
@@ -14,17 +18,27 @@ $carrito = $_SESSION['carrito'] ?? [];
 $compraRealizada = false;
 $codigosGenerados = [];
 $bono = 0;
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['metodo_pago'])) {
-    // Simula compra y genera códigos
     $compraRealizada = true;
     $numJuegos = count($carrito);
+
     for ($i = 0; $i < $numJuegos; $i++) {
         $codigosGenerados[] = strtoupper(bin2hex(random_bytes(8)));
     }
+
     $bono = isset($_POST['total_final']) ? floatval($_POST['total_final']) * 0.10 : 0;
+
+    // 🔥 SUMAR PUNTOS A LA BASE DE DATOS
+    if ($usuarioId && $bono > 0) {
+        $stmt = $conn->prepare("UPDATE usuarios SET puntos = puntos + ? WHERE id_usuario = ?");
+        $stmt->bind_param("di", $bono, $usuarioId);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     unset($_SESSION['carrito']); // Vacía el carrito tras compra
 }
+
 
 $productosEnCarrito = [];
 $total = 0;

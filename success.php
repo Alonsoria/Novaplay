@@ -52,17 +52,20 @@ try {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Compra completada - Novaplay</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Novaplay</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="icon" href="./images/novaplay icono.png">
 </head>
-<body>
 <header>
     <div class="header-container">
         <nav class="navbar">
             <ul>
                 <li><a href="productos.php">Productos</a></li>
                 <li><a href="combos.php">Combos</a></li>
+                <li><a href="about_us.php">Acerca de nosotros</a></li>
 
                 <!-- LOGO -->
                 <li class="logo-item">
@@ -71,7 +74,31 @@ try {
                     </a>
                 </li>
 
-                <li><a href="about_us.php">Acerca de nosotros</a></li>
+                <!-- MENU DE PLATAFORMAS -->
+                <li class="platforms-wrapper">
+                    <button id="platformToggle" class="platform-toggle" aria-expanded="false">
+                        Plataformas ▼
+                    </button>
+                    <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
+                        <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
+                        <ul>
+                            <?php foreach($platformsArr as $plat): ?>
+                                <li>
+                                    <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
+                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
+                                        <?php echo htmlspecialchars($plat['nombre']); ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="carrito.php">
+                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
+                    </a>
+                </li>
 
                 <!-- LOGIN -->
                 <li class="login-item">
@@ -81,139 +108,21 @@ try {
         </nav>
     </div>
 </header>
-<main>
-<?php if ($compraRealizada): ?>
-    <div class="loading" id="loadingAnim">Procesando pago...</div>
 
-    <script>
-        setTimeout(function(){
-            document.getElementById('loadingAnim').style.display = 'none';
-            document.getElementById('compraWrapper').style.display = 'flex';
-        }, 3000);
-    </script>
-
-    <style>
-        .compra-wrapper {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 60vh;
-            gap: 25px;
-        }
-
-        .compra-card {
-            background: #151525;
-            border-radius: 16px;
-            padding: 30px 40px;
-            text-align: center;
-            box-shadow: 0 0 25px rgba(255, 0, 200, 0.4);
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .compra-exito {
-            font-size: 26px;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-
-        .codigos-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .codigo-item {
-            background-color: #2c2c2c;
-            color: #ffcc00;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 18px;
-            letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
-        }
-
-        .bono-info {
-            margin-top: 20px;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #ff00cc, #7a00ff);
-            color: #ffffff;
-            font-size: 20px;
-            font-weight: bold;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(255, 0, 200, 0.5);
-        }
-
-        .loading {
-            text-align: center;
-            font-size: 22px;
-            color: #ffffff;
-            margin-top: 80px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-    </style>
-
-    <div id="compraWrapper" class="compra-wrapper">
-        <div class="compra-card">
-            <div class="compra-exito">
-                ¡Compra realizada correctamente! 🎉
-            </div>
-<div class="codigos-list">
-    <?php foreach ($codigosGenerados as $codigo): ?>
-        <div class="codigo-item">
-            <span class="codigo-text"><?php echo $codigo; ?></span>
-            <button class="copy-btn" onclick="copiarCodigo('<?php echo $codigo; ?>', this)" title="Copiar código">
-                📋
-            </button>
+<footer class="footer">
+    <div class="footer-container">
+        <p>&copy; <?php echo date("Y"); ?> Novaplay - E-commerce de Videojuegos</p>
+        <div class="footer-links">
+            <a href="aviso_privacidad.php" class="footer-links">Aviso de Privacidad</a>
+            <span>|</span>
+            <a href="terminos_condiciones.php" class="footer-links">Términos y Condiciones</a>
+            <span>|</span>
+            <a href="politica_cookies.php" class="footer-links">Política de Cookies</a>
         </div>
-    <?php endforeach; ?>
-    <script>
-function copiarCodigo(codigo, boton) {
-    navigator.clipboard.writeText(codigo).then(() => {
-        // Quitar mensaje anterior si existe
-        const msgExistente = boton.parentElement.querySelector('.copy-msg');
-        if (msgExistente) msgExistente.remove();
-
-        // Crear mensaje
-        const msg = document.createElement('span');
-        msg.className = 'copy-msg';
-        msg.innerText = 'Copiado al portapapeles';
-
-        boton.parentElement.appendChild(msg);
-
-        // Quitar mensaje después de 2 segundos
-        setTimeout(() => {
-            msg.remove();
-        }, 2000);
-    });
-}
-</script>
-
-</div>
-
-            <div class="bono-info">
-                Has recibido un bono del 10% de tu compra: <br>
-                <strong>$<?php echo number_format($bono, 2); ?></strong>
-            </div>
-        </div>
+        <p class="footer-note">
+            La información proporcionada será tratada conforme a nuestro Aviso de Privacidad.
+        </p>
     </div>
-    <?php else: ?>
-        <p style="text-align:center;">Error al procesar el pago.</p>
-    <?php endif; ?>
-</main>
-
-<footer>
-    <p>&copy; <?php echo date("Y"); ?> Novaplay</p>
 </footer>
 </body>
 </html>

@@ -47,7 +47,8 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <meta charset="UTF-8">
     <title>Novaplay</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="./privacidad.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="icon" href="./images/novaplay icono.png">
 
@@ -55,19 +56,23 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 
 <header>
     <div class="header-container">
-        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-
         <nav class="navbar">
             <ul>
-                <li><a href="index.php">Inicio</a></li>
                 <li><a href="productos.php">Productos</a></li>
                 <li><a href="combos.php">Combos</a></li>
                 <li><a href="about_us.php">Acerca de nosotros</a></li>
 
+                <!-- LOGO -->
+                <li class="logo-item">
+                    <a href="index.php">
+                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
+                    </a>
+                </li>
+
                 <!-- MENU DE PLATAFORMAS -->
                 <li class="platforms-wrapper">
                     <button id="platformToggle" class="platform-toggle" aria-expanded="false">
-                        Plataformas ▾
+                        Plataformas ▼
                     </button>
                     <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
                         <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
@@ -75,7 +80,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                             <?php foreach($platformsArr as $plat): ?>
                                 <li>
                                     <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"> 
+                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
                                         <?php echo htmlspecialchars($plat['nombre']); ?>
                                     </a>
                                 </li>
@@ -84,33 +89,30 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                     </div>
                 </li>
 
-                <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
+                <li>
+                    <a href="carrito.php">
+                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
+                    </a>
+                </li>
+
+                <!-- LOGIN -->
+                <li class="login-item">
+                    <a href="login.php" class="login-btn">Login</a>
+                </li>
             </ul>
         </nav>
     </div>
 </header>
 
-<body class="legal-body">
-    <div class="aboutus-grid">
-        <div class="legal-container">
-            <h2>Términos y Condiciones de Uso</h2>
-            <p class="">El acceso y uso del sitio web <strong>Novaplay</strong> implican la aceptación de los presentes Términos y Condiciones. Todos los precios incluyen IVA y están sujetos a disponibilidad.</p>
-            <p>Las compras realizadas son definitivas y solo aplican devoluciones en caso de defectos comprobables del producto digital. Los métodos de pago aceptados son los indicados en la página de compra.</p>
-            <p>Todo el contenido, logotipos, imágenes y nombres son propiedad de <strong>Novaplay</strong> y están protegidos por las leyes de derechos de autor.</p>
-            <p>Al utilizar este sitio, el usuario acepta cumplir las disposiciones establecidas en el presente documento.</p>
-            <a href="index.php" class="btn btn-cart">← Seguir comprando</a>
-        </div>
-    </div>
-
 <footer class="footer">
     <div class="footer-container">
         <p>&copy; <?php echo date("Y"); ?> Novaplay - E-commerce de Videojuegos</p>
         <div class="footer-links">
-            <a href="aviso_privacidad.php">Aviso de Privacidad</a>
+            <a href="aviso_privacidad.php" class="footer-links">Aviso de Privacidad</a>
             <span>|</span>
-            <a href="terminos_condiciones.php">Términos y Condiciones</a>
+            <a href="terminos_condiciones.php" class="footer-links">Términos y Condiciones</a>
             <span>|</span>
-            <a href="politica_cookies.php">Política de Cookies</a>
+            <a href="politica_cookies.php" class="footer-links">Política de Cookies</a>
         </div>
         <p class="footer-note">
             La información proporcionada será tratada conforme a nuestro Aviso de Privacidad.
