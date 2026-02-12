@@ -51,7 +51,6 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="icon" href="./images/novaplay icono.png">
 </head>
-<body>
 <header>
     <div class="header-container">
         <nav class="navbar">
@@ -93,15 +92,83 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                     </a>
                 </li>
 
-                <!-- LOGIN -->
+                <!-- 👤 USUARIO / LOGIN -->
+                <?php if (isset($_SESSION['user_id'])): 
+                    $stmt = $conn->prepare("SELECT nombre, email, puntos FROM usuarios WHERE id_usuario = ?");
+                    $stmt->bind_param("i", $_SESSION['user_id']);
+                    $stmt->execute();
+                    $user = $stmt->get_result()->fetch_assoc();
+                    $stmt->close();
+                ?>
+                <li class="user-menu">
+                    <span class="user-name">👤 <?php echo htmlspecialchars($user['nombre']); ?> ▾</span>
+                    <div class="user-dropdown">
+                        <p><strong>Correo:</strong><br><?php echo htmlspecialchars($user['email']); ?></p>
+                        <p><strong>Puntos:</strong> ⭐ <?php echo (int)$user['puntos']; ?></p>
+                        <button class="logout-btn" id="logoutBtn">Cerrar sesión</button>
+                    </div>
+                </li>
+                <?php else: ?>
                 <li class="login-item">
                     <a href="login.php" class="login-btn">Login</a>
                 </li>
+                <li class="login-item">
+                    <a href="signup.php" class="login-btn">Registrarse</a>
+                </li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>
 </header>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            fetch("logout_ajax.php", {
+                method: "POST"
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showModal("Cerraste sesión exitosamente", "success");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                }
+            });
+        });
+    }
+});
+
+function showModal(message, type) {
+    const modalOverlay = document.createElement("div");
+    modalOverlay.className = "modal-overlay show";
+
+    modalOverlay.innerHTML = `
+        <div class="modal-box ${type}">
+            <div class="modal-icon">✔️</div>
+            <div class="modal-message">${message}</div>
+        </div>
+    `;
+
+    document.body.appendChild(modalOverlay);
+
+    modalOverlay.addEventListener("click", () => {
+        modalOverlay.classList.remove("show");
+        setTimeout(() => modalOverlay.remove(), 300);
+    });
+
+    setTimeout(() => {
+        modalOverlay.classList.remove("show");
+        setTimeout(() => modalOverlay.remove(), 300);
+    }, 2000);
+}
+</script>
+
+<body>
 
 <section class="hero">
   <!-- Hero dinámico -->
@@ -324,24 +391,6 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         </div>
     </div>
 </div>
-
-<script>
-(function(){
-    function isLogged() { return !!localStorage.getItem('novaplay_user'); }
-    const headerBtn = document.getElementById('headerLoginBtn');
-    function updateHeader() {
-        if (!headerBtn) return;
-        if (isLogged()) {
-            headerBtn.textContent = 'Cerrar sesión';
-            headerBtn.href = '#';
-            headerBtn.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('novaplay_user'); location.reload(); });
-        } else {
-            headerBtn.textContent = 'Iniciar sesión';
-            headerBtn.href = 'login.php';
-        }
-    }
-})
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>

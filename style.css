@@ -1335,3 +1335,127 @@ footer {
     color: #00ff99;
     margin-left: 10px;
 }
+.user-menu {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-name {
+    font-weight: 600;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.user-name:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: rgba(20, 20, 40, 0.95);
+    border-radius: 12px;
+    padding: 14px 16px;
+    width: 220px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.user-dropdown p {
+    margin: 6px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.logout-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff3cac, #784ba0, #2b86c5);
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* 🔥 MODAL */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-box {
+    background: linear-gradient(135deg, #1e1e2f, #2b0a3d);
+    border-radius: 20px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    transform: scale(0.7);
+    animation: popIn 0.5s forwards;
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    animation: bounce 1s infinite;
+}
+
+.modal-box.success .modal-icon {
+    background: linear-gradient(135deg, #ff3cac, #784ba0, #2b86c5);
+}
+
+.modal-message {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
