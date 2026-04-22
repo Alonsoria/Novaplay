@@ -68,9 +68,9 @@ body {
     }
 
     .icon-circle svg {
-      width: 28px;
-      height: 28px;
-      fill: white;
+      width: 35px;
+      height: 35px;
+      fill: #ffffff00;
     }
 
     h1 {
@@ -130,7 +130,7 @@ body {
       font-size: 0.9rem;
       outline: none;
       transition: all 0.25s ease;
-      backdrop-filter: blur(6px);
+
     }
 
     input::placeholder {

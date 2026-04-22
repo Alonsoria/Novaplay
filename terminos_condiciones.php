@@ -47,7 +47,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <meta charset="UTF-8">
     <title>Novaplay</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./privacidad.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="icon" href="./images/novaplay icono.png">
@@ -103,6 +103,35 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         </nav>
     </div>
 </header>
+
+<body class="legal-body">
+    <div class="legal-container">
+        <h2>Términos y Condiciones de Uso</h2>
+
+<p>Al acceder y utilizar la plataforma NovaPlay, el usuario acepta cumplir con los presentes términos y condiciones. Si no está de acuerdo con alguno de estos términos, deberá abstenerse de utilizar el servicio.</p>
+
+<p><strong>1. Uso de la plataforma</strong><br>
+El usuario se compromete a utilizar NovaPlay únicamente con fines legales y de acuerdo con la normativa aplicable. Queda prohibido el uso de la plataforma para actividades ilícitas, fraudulentas o que puedan dañar a terceros.</p>
+
+<p><strong>2. Cuenta de usuario</strong><br>
+En caso de requerir registro, el usuario es responsable de mantener la confidencialidad de sus datos de acceso, así como de todas las actividades realizadas desde su cuenta.</p>
+
+<p><strong>3. Contenido</strong><br>
+Todo el contenido disponible en NovaPlay, incluyendo textos, imágenes, software y diseño, es propiedad de la plataforma o cuenta con licencia para su uso. Queda prohibida su reproducción o distribución sin autorización previa.</p>
+
+<p><strong>4. Disponibilidad del servicio</strong><br>
+NovaPlay no garantiza que la plataforma estará disponible en todo momento o libre de errores, pudiendo realizar modificaciones, suspensiones o interrupciones sin previo aviso.</p>
+
+<p><strong>5. Limitación de responsabilidad</strong><br>
+NovaPlay no será responsable por daños directos o indirectos derivados del uso o imposibilidad de uso de la plataforma.</p>
+
+<p><strong>6. Modificaciones</strong><br>
+La plataforma se reserva el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor una vez publicados en el sitio.</p>
+
+<p><strong>7. Legislación aplicable</strong><br>
+Estos términos se rigen conforme a las leyes aplicables en México.</p>
+        <a href="index.php" class="btn btn-cart">← Seguir comprando</a>
+    </div>
 
 <footer class="footer">
     <div class="footer-container">

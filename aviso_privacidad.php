@@ -18,7 +18,6 @@ if (isset($_GET['add'])) {
     header("Location: index.php");
     exit;
 }
-
 $platformsArr = [];
 $platRes = $conn->query("SELECT * FROM plataformas ORDER BY nombre");
 if ($platRes) {
@@ -93,9 +92,27 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <div class="aboutus-grid">
         <div class="legal-container">
             <h2>Aviso de Privacidad</h2>
-            <p>En <strong>Novaplay</strong>, la protección de sus datos personales es nuestra prioridad. Recopilamos información como nombre, correo electrónico, dirección y datos de contacto únicamente para procesar pedidos, mejorar su experiencia de usuario y ofrecer promociones.</p>
-            <p>Sus datos no se comparten con terceros, salvo para procesar pagos o envíos. Usted puede ejercer sus derechos de acceso, rectificación, cancelación u oposición (ARCO) enviando un correo a <strong>soporte@novaplay.com</strong>.</p>
-            <p>Fecha de última actualización: <strong>Octubre 2025</strong>.</p>
+
+<p>En NovaPlay, la protección de sus datos personales es una prioridad. Este aviso de privacidad describe cómo recopilamos, utilizamos y protegemos su información.</p>
+
+<p><strong>Datos que recopilamos</strong><br>
+Podemos recopilar información personal como nombre, correo electrónico y datos de uso de la plataforma, únicamente cuando el usuario los proporciona de manera voluntaria.</p>
+
+<p><strong>Finalidad del uso de datos</strong><br>
+La información recopilada se utiliza para brindar y mejorar nuestros servicios, gestionar cuentas de usuario y ofrecer una mejor experiencia dentro de la plataforma.</p>
+
+<p><strong>Protección de la información</strong><br>
+Implementamos medidas de seguridad adecuadas para proteger los datos personales contra acceso no autorizado, alteración o divulgación.</p>
+
+<p><strong>Compartición de datos</strong><br>
+NovaPlay no vende ni comparte datos personales con terceros, salvo cuando sea necesario para cumplir con obligaciones legales.</p>
+
+<p><strong>Derechos del usuario</strong><br>
+El usuario tiene derecho a acceder, rectificar o eliminar sus datos personales, así como a oponerse a su uso, de acuerdo con la legislación aplicable.</p>
+
+<p><strong>Modificaciones</strong><br>
+Nos reservamos el derecho de actualizar este aviso de privacidad en cualquier momento. Los cambios serán publicados en esta sección.</p>
+            <p>Fecha de última actualización: <strong>Abril 2026</strong>.</p>
             <a href="index.php" class="btn btn-cart">← Seguir comprando</a>
         </div>
     </div>

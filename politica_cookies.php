@@ -93,10 +93,22 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 <body class="legal-body">
     <div class="legal-container">
         <h2>Política de Cookies</h2>
-        <p>Este sitio utiliza cookies propias y de terceros para mejorar su experiencia, analizar el tráfico y personalizar contenido. Puede aceptar o rechazar su uso desde la configuración de su navegador.</p>
-        <p>Las cookies se utilizan con fines funcionales, analíticos y publicitarios, respetando su privacidad en todo momento.</p>
-        <p>Al continuar navegando en <strong>Novaplay</strong>, usted acepta nuestra Política de Cookies y el tratamiento de los datos conforme al Aviso de Privacidad.</p>
-        <a href="index.php" class="btn btn-cart">← Seguir comprando</a>
+
+<p>En NovaPlay utilizamos cookies para mejorar la experiencia del usuario, analizar el tráfico del sitio y personalizar el contenido.</p>
+
+<p>Las cookies son pequeños archivos de texto que se almacenan en su dispositivo cuando visita un sitio web. Estas permiten reconocer su navegador y recordar información sobre su visita.</p>
+
+<p><strong>Tipos de cookies que utilizamos</strong><br>
+Utilizamos cookies técnicas necesarias para el funcionamiento del sitio, cookies de análisis para entender cómo interactúan los usuarios con la plataforma, y cookies de personalización para mejorar su experiencia.</p>
+
+<p><strong>Uso de la información</strong><br>
+La información recopilada mediante cookies se utiliza únicamente con fines estadísticos y de mejora del servicio, y no se comparte con terceros sin su consentimiento.</p>
+
+<p><strong>Gestión de cookies</strong><br>
+El usuario puede configurar su navegador para rechazar o eliminar las cookies en cualquier momento. Sin embargo, esto puede afectar el correcto funcionamiento del sitio.</p>
+
+<p><strong>Modificaciones</strong><br>
+NovaPlay se reserva el derecho de actualizar esta política de cookies en cualquier momento. Los cambios serán publicados en esta misma sección.</p>
     </div>
 
 <footer class="footer">

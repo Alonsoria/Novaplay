@@ -69,11 +69,10 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <div class="payment-card">
       <div class="icon-circle">
         <!-- Dollar icon -->
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 1a1 1 0 011 1v1.07c2.28.27 4 1.58 4 3.38a1 1 0 01-2 0c0-.9-1.34-1.5-3-1.5s-3 .6-3 1.5c0 .87.88 1.22 3.32 1.86 2.82.74 4.68 1.63 4.68 4.14 0 2.05-1.72 3.36-4 3.65V22a1 1 0 01-2 0v-1.07c-2.28-.27-4-1.58-4-3.38a1 1 0 012 0c0 .9 1.34 1.5 3 1.5s3-.6 3-1.5c0-.93-.9-1.3-3.5-1.98C8.8 13.85 7 12.94 7 10.43c0-2.05 1.72-3.36 4-3.65V2a1 1 0 011-1z" />
-        </svg>
-      </div>
 
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-icon lucide-receipt"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg>     
+      
+        </div>
       <h1>¿Estás listo para pagar?</h1>
       <p class="subtitle">Agrega tus datos de tarjeta.</p>
 
@@ -82,10 +81,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         <div class="input-group">
           <label for="cardNumber">Número de la tarjeta</label>
           <div class="input-wrapper">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3 4h18a2 2 0 012 2v12a2 2 0 01-2 2H3a2 2 0 01-2-2V6a2 2 0 012-2zm0 4v10h18V8H3zm2 6h4v2H5v-2z" />
-            </svg>
-            <input
+          <input
               type="text"
               id="cardNumber"
               name="cardNumber"
@@ -94,6 +90,8 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
               maxlength="19"
               required
             />
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hash-icon lucide-hash"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
+
           </div>
         </div>
 
@@ -101,9 +99,6 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
         <div class="input-group">
           <label for="cardHolder">Titular de la tarjeta</label>
           <div class="input-wrapper">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.42 0-8 2.24-8 5v1a1 1 0 001 1h14a1 1 0 001-1v-1c0-2.76-3.58-5-8-5z" />
-            </svg>
             <input
               type="text"
               id="cardHolder"
@@ -111,6 +106,8 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
               placeholder="Jon Doe"
               required
             />
+             <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-star-icon lucide-user-star"><path d="M16.051 12.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.866l-1.156-1.153a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"/><path d="M8 15H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/></svg>
+
           </div>
         </div>
 
@@ -119,9 +116,6 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
           <div class="input-group">
             <label for="expiry">Fecha de vencimiento</label>
             <div class="input-wrapper">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 2a1 1 0 011 1v1h8V3a1 1 0 112 0v1h1a2 2 0 012 2v13a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h1V3a1 1 0 011-1zm12 8H5v9h14v-9zM7 12h4v4H7v-4z" />
-              </svg>
               <input
                 type="text"
                 id="expiry"
@@ -131,6 +125,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                 maxlength="5"
                 required
               />
+              <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar1-icon lucide-calendar-1"><path d="M11 14h1v4"/><path d="M16 2v4"/><path d="M3 10h18"/><path d="M8 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
             </div>
           </div>
 
@@ -138,9 +133,6 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
           <div class="input-group">
             <label for="cvv">CVV</label>
             <div class="input-wrapper">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 1a5 5 0 015 5v3h1a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9a2 2 0 012-2h1V6a5 5 0 015-5zm-3 8h6V6a3 3 0 10-6 0v3z" />
-              </svg>
               <input
                 type="password"
                 id="cvv"
@@ -150,6 +142,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
                 maxlength="3"
                 required
               />
+              <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             </div>
           </div>
         </div>
