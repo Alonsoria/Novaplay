@@ -1,11 +1,5 @@
 <?php
-
-
-// carrito.php
-session_start();
-$usuarioId = $_SESSION['id_usuario'] ?? null;
-
-include("config.php");
+include("header.php");
 
 // Acciones (vaciar)
 if (isset($_GET['action']) && $_GET['action'] === 'clear') {
@@ -239,30 +233,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
     </style>
 </head>
 <body>
-<header>
-    <div class="header-container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="productos.php">Productos</a></li>
-                <li><a href="combos.php">Combos</a></li>
-
-                <!-- LOGO -->
-                <li class="logo-item">
-                    <a href="index.php">
-                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-                    </a>
-                </li>
-
-                <li><a href="about_us.php">Acerca de nosotros</a></li>
-
-                <!-- LOGIN -->
-                <li class="login-item">
-                    <a href="login.php" class="login-btn">Login</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
 <main>
     <div class="cart-actions">
         <a href="index.php" class="btn btn-cart">← Seguir comprando</a>

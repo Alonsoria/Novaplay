@@ -1,20 +1,4 @@
-<?php
-session_start();
-include("config.php");
-
-if (!isset($_SESSION['carrito'])) {
-    $_SESSION['carrito'] = [];
-}
-
-$platformsArr = [];
-$platRes = $conn->query("SELECT * FROM plataformas ORDER BY nombre");
-if ($platRes) {
-    while ($r = $platRes->fetch_assoc()) $platformsArr[] = $r;
-}
-
-$cartCount = 0;
-foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
-?>
+<?php include("header.php"); ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,44 +9,6 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
     <link rel="stylesheet" href="pago_tarjeta.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<header>
-    <div class="header-container">
-        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.php">Inicio</a></li>
-                <li><a href="productos.php">Productos</a></li>
-                <li><a href="combos.php">Combos</a></li>
-                <li><a href="about_us.php">Acerca de nosotros</a></li>
-
-                <!-- MENU DE PLATAFORMAS -->
-                <li class="platforms-wrapper">
-                    <button id="platformToggle" class="platform-toggle" aria-expanded="false">
-                        Plataformas ▾
-                    </button>
-                    <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
-                        <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
-                        <ul>
-                            <?php foreach($platformsArr as $plat): ?>
-                                <li>
-                                    <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon"> 
-                                        <?php echo htmlspecialchars($plat['nombre']); ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </li>
-
-                <li><a href="carrito.php"> Carrito <span class="cart-badge"><?php echo $cartCount; ?></span></a></li>
-            </ul>
-        </nav>
-        <div class="user-login">
-            <a href="login.php" id="headerLoginBtn" class="btn-login">Iniciar sesión</a>
-        </div>
-    </div>
-</header>
 <body>
   <main class="page-content">
   <div class="payment-wrapper">
@@ -103,7 +49,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
               type="text"
               id="cardHolder"
               name="cardHolder"
-              placeholder="Jon Doe"
+              placeholder="Fox McCloud"
               required
             />
              <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-star-icon lucide-user-star"><path d="M16.051 12.616a1 1 0 0 1 1.909.024l.737 1.452a1 1 0 0 0 .737.535l1.634.256a1 1 0 0 1 .588 1.806l-1.172 1.168a1 1 0 0 0-.282.866l.259 1.613a1 1 0 0 1-1.541 1.134l-1.465-.75a1 1 0 0 0-.912 0l-1.465.75a1 1 0 0 1-1.539-1.133l.258-1.613a1 1 0 0 0-.282-.866l-1.156-1.153a1 1 0 0 1 .572-1.822l1.633-.256a1 1 0 0 0 .737-.535z"/><path d="M8 15H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/></svg>
@@ -172,6 +118,9 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
   </div>
   </main>
 </body>
+
+ <?php include("footer.php"); ?>
+
 
   <script>
     const form = document.getElementById('paymentForm');
