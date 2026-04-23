@@ -19,8 +19,6 @@ if ($filtroPlataforma > 0) {
 }
 $result = $conn->query($sql);
 
-$cartCount = 0;
-foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 ?>
 <!DOCTYPE html>
 <html lang="es">
