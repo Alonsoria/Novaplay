@@ -1,6 +1,11 @@
 <?php
 include("header.php");
+require 'paypal_config.php';
 
+use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
+
+$usuarioId = $_SESSION['usuario_id'] ?? null;
 // Acciones (vaciar)
 if (isset($_GET['action']) && $_GET['action'] === 'clear') {
     unset($_SESSION['carrito']);
@@ -12,6 +17,44 @@ $carrito = $_SESSION['carrito'] ?? [];
 $compraRealizada = false;
 $codigosGenerados = [];
 $bono = 0;
+
+// Procesar callback de PayPal
+if (isset($_GET['metodo_pago']) && $_GET['metodo_pago'] === 'paypal' && isset($_GET['paymentId']) && isset($_GET['PayerID'])) {
+    $paymentId = $_GET['paymentId'];
+    $payerId = $_GET['PayerID'];
+    $total = isset($_GET['total']) ? floatval($_GET['total']) : 0;
+    
+    try {
+        $payment = Payment::get($paymentId, $paypal);
+        $execution = new PaymentExecution();
+        $execution->setPayerId($payerId);
+        $payment->execute($execution, $paypal);
+        
+        $compraRealizada = true;
+        $numJuegos = count($carrito);
+        
+        for ($i = 0; $i < $numJuegos; $i++) {
+            $codigosGenerados[] = strtoupper(bin2hex(random_bytes(8)));
+        }
+        
+        $bono = $total * 0.10;
+        
+        // 🔥 SUMAR PUNTOS A LA BASE DE DATOS
+        if ($usuarioId && $bono > 0) {
+            $stmt = $conn->prepare("UPDATE usuarios SET puntos = puntos + ? WHERE id_usuario = ?");
+            $stmt->bind_param("di", $bono, $usuarioId);
+            $stmt->execute();
+            $stmt->close();
+        }
+        
+        unset($_SESSION['carrito']); // Vacía el carrito tras compra
+    } catch (Exception $ex) {
+        echo "❌ Error al procesar el pago: " . $ex->getMessage();
+        exit;
+    }
+}
+
+// Procesar pago por tarjeta (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['metodo_pago'])) {
     $compraRealizada = true;
     $numJuegos = count($carrito);
@@ -443,9 +486,8 @@ function copiarCodigo(codigo, boton) {
         </div>
     </div> 
 </main>
-
-<footer>
-    <p>&copy; <?php echo date("Y"); ?> Novaplay</p>
-</footer>
+<?php
+    include("footer.php");
+?>
 </body>
 </html>

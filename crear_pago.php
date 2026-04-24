@@ -25,7 +25,7 @@ $transaction->setAmount($amount)
              ->setDescription("Compra en Novaplay - E-commerce de videojuegos");
 
 $redirectUrls = new RedirectUrls();
-$redirectUrls->setReturnUrl("http://localhost/novaplay/success.php")
+$redirectUrls->setReturnUrl("http://localhost/novaplay/carrito.php?metodo_pago=paypal&total=" . $total)
              ->setCancelUrl("http://localhost/novaplay/cancel.php");
 
 $payment = new Payment();
