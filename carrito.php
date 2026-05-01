@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include("header.php");
 require 'paypal_config.php';
 
@@ -8,8 +9,11 @@ use PayPal\Api\PaymentExecution;
 $usuarioId = $_SESSION['usuario_id'] ?? null;
 // Acciones (vaciar)
 if (isset($_GET['action']) && $_GET['action'] === 'clear') {
-    unset($_SESSION['carrito']);
-    header("Location: carrito.php");
+    if (!empty($_SESSION['carrito'])) {
+        unset($_SESSION['carrito']);
+    }
+    ob_end_clean();
+    header('Location: carrito.php');
     exit;
 }
 
@@ -49,7 +53,9 @@ if (isset($_GET['metodo_pago']) && $_GET['metodo_pago'] === 'paypal' && isset($_
         
         unset($_SESSION['carrito']); // Vacía el carrito tras compra
     } catch (Exception $ex) {
-        echo "❌ Error al procesar el pago: " . $ex->getMessage();
+        $_SESSION['error_pago'] = "Error al procesar el pago: " . $ex->getMessage();
+        ob_end_clean();
+        header('Location: carrito.php');
         exit;
     }
 }
@@ -145,6 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
         unset($_SESSION['carrito'][$productId]);
     }
 
+    ob_end_clean();
     header("Location: carrito.php");
     exit;
 }
@@ -186,10 +193,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
             align-items: center;
             justify-content: space-between;
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 15px;
             background: #1f1f2e;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            min-height: 120px;
+            gap: 20px;
         }
 
         .cart-list img {
@@ -202,6 +211,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
             display: flex;
             align-items: center;
             gap: 15px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-list .product-info strong {
+            flex: 1;
+            word-wrap: break-word;
+            max-width: 250px;
+        }
+
+        .cart-list .product-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .cart-list .subtotal {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+            min-width: 100px;
+            text-align: right;
         }
 
         .cart-list .product-actions {
@@ -228,12 +261,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
     box-shadow: 0 0 12px rgba(255, 0, 200, 0.6);
 }
 
+.cart-list .cantidad {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    min-width: 40px;
+    text-align: center;
+}
+
+.cart-list .product-actions form {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+.cart-list .product-actions form button {
+    margin: 0;
+}
+
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+
+        .cart-list .cantidad {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            min-width: 40px;
+            text-align: center;
+        }
 
         .cart-list .delete-btn {
             background: #ff4d4d;
@@ -282,6 +341,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
         <a href="carrito.php?action=clear" class="btn btn-cart btn-clear">Vaciar carrito</a>
     </div>
     <hr>
+<?php if (isset($_SESSION['error_pago'])): ?>
+    <div style="background: #ff4d4d; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: bold;">
+        ❌ <?php echo htmlspecialchars($_SESSION['error_pago']); ?>
+    </div>
+    <?php unset($_SESSION['error_pago']); ?>
+<?php endif; ?>
 <?php if ($compraRealizada): ?>
     <div class="loading" id="loadingAnim">Procesando pago...</div>
 
@@ -488,6 +553,7 @@ function copiarCodigo(codigo, boton) {
 </main>
 <?php
     include("footer.php");
+    ob_end_flush();
 ?>
 </body>
 </html>

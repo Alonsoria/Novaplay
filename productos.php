@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'config.php'; 
 
 if (!isset($_SESSION['carrito'])) {
@@ -57,56 +56,7 @@ $filtroPlataforma = isset($_GET['plataforma']) ? (int)$_GET['plataforma'] : 0;
 
 </head>
 <body>
-<header>
-    <div class="header-container">
-        <nav class="navbar">
-            <ul>
-                <li><a href="productos.php">Productos</a></li>
-                <li><a href="combos.php">Combos</a></li>
-                <li><a href="about_us.php">Acerca de nosotros</a></li>
-
-                <!-- LOGO -->
-                <li class="logo-item">
-                    <a href="index.php">
-                        <img src="./images/novaplay logo 2.png" alt="Novaplay Logo" class="logo">
-                    </a>
-                </li>
-
-                <!-- MENU DE PLATAFORMAS -->
-                <li class="platforms-wrapper">
-                    <button id="platformToggle" class="platform-toggle" aria-expanded="false">
-                        Plataformas ▾
-                    </button>
-                    <div id="platformMenu" class="submenu" aria-hidden="true" role="menu">
-                        <button id="platformClose" class="submenu-close" aria-label="Cerrar menú">✕</button>
-                        <ul>
-                            <?php foreach($platformsArr as $plat): ?>
-                                <li>
-                                    <a href="index.php?plataforma=<?php echo (int)$plat['id_plataforma']; ?>">
-                                        <img src="<?php echo htmlspecialchars($plat['icono']); ?>" alt="<?php echo htmlspecialchars($plat['nombre']); ?>" class="plat-icon">
-                                        <?php echo htmlspecialchars($plat['nombre']); ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </li>
-
-                <li>
-                    <a href="carrito.php">
-                        Carrito <span class="cart-badge"><?php echo $cartCount; ?></span>
-                    </a>
-                </li>
-
-                <!-- LOGIN -->
-                <li class="login-item">
-                    <a href="login.php" class="login-btn">Login</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
+    <?php include("header.php"); ?>
 
 <main>
     <?php
@@ -160,9 +110,10 @@ $filtroPlataforma = isset($_GET['plataforma']) ? (int)$_GET['plataforma'] : 0;
     ?>
 </main>
 
-<footer>
-    <p>&copy; <?php echo date("Y"); ?> Novaplay - E-commerce de Videojuegos</p>
-</footer>
+<?php 
+include("footer.php")
+?>
+
 
 <script>
 (function(){

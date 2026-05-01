@@ -79,7 +79,7 @@ foreach ($_SESSION['carrito'] as $q) $cartCount += $q;
 
 <main>
     <section class="aboutus-section">
-        <h1 class="aboutus-title">Sobre Nosotros</h1>
+        <h1 class="aboutus-title">Acerca de Nosotros</h1>
         <div class="aboutus-grid">
             <div class="aboutus-text">
                 <h2 class="aboutus-subtitle">Nuestra Historia</h2>
